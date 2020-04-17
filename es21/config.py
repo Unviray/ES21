@@ -7,9 +7,11 @@ Base Configuration of es21.
 
 from datetime import date
 
-from .translations.mg_mg import (
-    month_name,
-    month_short2long, )
+from .translations import active
+
+
+month_name = active.month_name
+month_short2long = active.month_short2long
 
 
 class MonthBase(object):

@@ -2,5 +2,34 @@
 
 
 {% block container %}
-{{ app.config['MONTH'] }}
+<div class="row">
+    <div class="col-lg-9">
+        <a class="text-decoration-none mb-3" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
+            <div class="jumbotron accordion bg-dark text-light p-3 p-sm-4 p-md-5 rounded">
+                <h1 class="display-4">{{ app.config['MONTH'] }}</h1>
+                <div class="collapse show multi-collapse">
+                    <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
+                </div>
+                <hr class="my-1 my-sm-4 bg-light">
+                <p>Isan'ny mpitory: ??</p>
+
+                <div class="d-flex flex-column my-0 py-0">
+                    <div class="collapse show multi-collapse mx-auto my-0 py-0">
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="collapse multi-collapse mx-auto my-0 py-0">
+                        <i class="material-icons">keyboard_arrow_up</i>
+                    </div>
+                </div>
+
+                <div class="collapse multi-collapse">
+                    table
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 d-none d-lg-block">
+
+    </div>
+</div>
 {% endblock %}
