@@ -5,6 +5,8 @@ es21
 Root of entire project include app factory (create_app).
 """
 
+from random import randint
+
 from flask import Flask
 
 from . import config
@@ -27,5 +29,14 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     load_views(app)
+
+    @app.context_processor
+    def processor():
+        return dict(
+            len=len,
+            round=round,
+            rand10=lambda: randint(0, 100) < 10,
+            app=app,
+        )
 
     return app

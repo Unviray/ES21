@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/material-icons.css') }}">
+
+        {% block style %}{% endblock %}
+
+        <title>{% block title %}ES21{% endblock title %}</title>
+    </head>
+    <body>
+        {% block body %}
+        {% include "includes/navbar.html" %}
+
+        <div class="container mt-4 mt-md-5 pt-5">
+            {% block container %}
+            {% endblock %}
+        </div>
+        {% if rand10() %}
+        {% include "includes/footer.html" %}
+        {% endif %}
+        {% include "includes/toast.html" %}
+        {% endblock %}
+
+
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/Chart.min.js') }}""></script>
+
+        <script>
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl);
+            });
+
+            for (let i = 0; i < toastList.length; i++) {
+                let t = toastList[i];
+                t._config.delay = 5000;
+                t.show();
+            }
+        </script>
+
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>
