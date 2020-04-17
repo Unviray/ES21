@@ -2,7 +2,9 @@ from functools import wraps
 
 from flask import (
     request,
-    render_template, )
+    redirect,
+    url_for as url,
+    render_template as render, )
 
 
 def templated(template=None):
@@ -24,6 +26,20 @@ def templated(template=None):
                 ctx = {}
             elif not isinstance(ctx, dict):
                 return ctx
-            return render_template(template_name, **ctx)
+            return render(template_name, **ctx)
         return decorated_function
     return decorator
+
+
+def navbar_form(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if request.method == 'POST':
+            try:
+                value = request.form['search']
+                return redirect(url('main.search', value=value))
+            except KeyError:
+                pass
+
+        return f(*args, **kwargs)
+    return decorated_function

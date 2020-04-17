@@ -1,19 +1,19 @@
 <a class="text-dark text-decoration-none" href="">
     <div class="card d-flex flex-row shadow-sm">
         <div class="d-flex flex-shrink-1 bg-primary flex-column p-3 round">
-            <div class="text-light h5">{{ m['id'] }}</div>
-            <div class="text-light h5 mt-auto text-center mb-0">{{ m['groupe'] }}</div>
+            <div class="text-light h5">{{ p['id'] }}</div>
+            <div class="text-light h5 mt-auto text-center mb-0">{{ p['groupe'] }}</div>
         </div>
         <div class="card-body p-3">
             <h5 class="card-title mb-1">
-                {{ m['anarana'] }} <strong>{{ m['fanampinanarana'] }}</strong>
+                {{ p['anarana'] }} <strong>{{ p['fanampinanarana'] }}</strong>
             </h5>
 
             <div>
-                {% if m['tombotsoa'] %}
-                <span class="badge rounded-pill bg-primary text-light">{{ m['tombotsoa'] }}</span>
+                {% if p['tombotsoa'] %}
+                <span class="badge rounded-pill bg-primary text-light">{{ p['tombotsoa'] }}</span>
                 {% endif %}
-                {% if m['maharitra'] %}
+                {% if p['maharitra'] %}
                 <span class="badge rounded-pill bg-warning text-dark">Mpisavalalana Maharitra</span>
                 {% endif %}
             </div>
