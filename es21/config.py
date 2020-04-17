@@ -5,6 +5,7 @@ es21.config
 Base Configuration of es21.
 """
 
+from pathlib import Path
 from datetime import date
 
 from .translations import active
@@ -107,3 +108,10 @@ class Config(object):
     last_month = MonthBase(date(year=y, month=m, day=1))  # day 1 is ignored
 
     MONTH = last_month - 1
+
+    SECRET_KEY = 'dev'
+
+    PATH = Path.home() / '.es21/'
+
+    DATABASE = PATH / 'db.json'
+    LOG = PATH / 'log'

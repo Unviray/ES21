@@ -9,11 +9,12 @@ from random import randint
 
 from flask import Flask
 
-from . import config
+from . import (
+    config,
+    database, )
 
 from .views import (
-    main,
-)
+    main, )
 
 
 def load_views(app):
@@ -28,6 +29,8 @@ def create_app(test_config=None):
         app.config.from_object(config.Config)
     else:
         app.config.from_mapping(test_config)
+
+    database.init_app(app)
 
     load_views(app)
 
