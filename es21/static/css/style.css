@@ -5,3 +5,7 @@
 .mini {
     font-size: small;
 }
+
+html, body {
+    height: 100%;
+}

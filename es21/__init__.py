@@ -7,7 +7,9 @@ Root of entire project include app factory (create_app).
 
 from random import randint
 
-from flask import Flask
+from flask import (
+    Flask,
+    url_for as url, )
 
 from . import (
     config,
@@ -39,7 +41,8 @@ def create_app(test_config=None):
         return dict(
             len=len,
             round=round,
-            rand10=lambda: randint(0, 100) < 10,
+            rand10=lambda: randint(0, 100) < 100,
+            url=url,
             app=app,
         )
 

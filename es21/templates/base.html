@@ -14,20 +14,20 @@
 
         <title>{% block title %}ES21{% endblock title %}</title>
     </head>
-    <body>
+    <body class="d-flex flex-column">
         {% block body %}
         {% include "includes/navbar.html" %}
 
-        <div class="container mt-4 mt-md-5 pt-5">
+        <div class="container mt-3">
             {% block container %}
-            {% endblock %}
+            {% endblock container %}
         </div>
         {% if rand10() %}
         {% include "includes/footer.html" %}
         {% endif %}
-        {% include "includes/toast.html" %}
-        {% endblock %}
+        {% endblock body %}
 
+        {% include "includes/toast.html" %}
 
         <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% include 'includes/navbar.html' %}
+<div class="bg-dark text-light mt-0 mb-4">
+    <div class="container py-4">
+        <form class="form-inline d-flex" method="post">
+            <label class="h3" for="search">Hitady</label>
+            <div class="bg-white flex-grow-1 d-flex ml-4 rounded">
+                <button class="btn btn-light my-0 d-flex rounded-0 rounded-left" type="submit"><i class="material-icons">search</i></button>
+                <input class="form-control bg-light border-light flex-grow-1 rounded-0 rounded-right pl-0" name="search" type="search" placeholder="Hitady" aria-label="Search">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for m in mpitory %}
+        <div class="col-md-6 mb-3">
+            {% include "includes/pr_card.html" %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

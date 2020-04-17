@@ -1,12 +1,18 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3 shadow-lg d-print-none">
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark shadow-lg d-print-none">
     <div class="container-md">
-        <a class="navbar-brand h1 mb-0 mr-3" href="">ES21</a>
+        <a class="navbar-brand h1 mb-0 mr-3" href="{{ url('home') }}">ES21</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse d-md-flex" id="navbarContent">
+            {% if not hide_search %}
+            <form class="form-inline btn-group ml-auto bg-white rounded" method="post">
+                <button class="btn btn-light my-2 my-sm-0 d-flex rounded-0 rounded-left" type="submit"><i class="material-icons">search</i></button>
+                <input class="form-control bg-light border-light rounded-0 rounded-right pl-0" name="search" type="search" placeholder="Hitady" aria-label="Search">
+            </form>
+            {% endif %}
         </div>
     </div>
 </nav>

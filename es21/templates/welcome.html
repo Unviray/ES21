@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="d-flex h-100 justify-content-center">
+    <div class="my-auto px-3 text-center">
+        <h1 class="h1 font-weight-bold">ES21</h1>
+        <p class="lead mb-0">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
+        <p class="lead">Ho fanombohana dia mampidira mpitory iray.</p>
+
+        <p class="lead d-flex justify-content-center">
+            <a href="#" class="btn btn-secondary border-dark bg-dark d-flex justify-content-center" id="newButton" style="width: 150px;">
+                <i class="material-icons">add</i>
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+const newButton = $('#newButton');
+newButton.mouseenter(function() {newButton.html("Mpitory vaovao")});
+newButton.mouseleave(function() {newButton.html('<i class="material-icons">add</i>')});
+</script>
+{% endblock %}
