@@ -18,6 +18,7 @@ from .views import (
 
 def load_views(app):
     app.register_blueprint(main.bp)
+    app.add_url_rule('/', endpoint='home')
 
 
 def create_app(test_config=None):
