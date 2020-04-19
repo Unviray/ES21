@@ -1,3 +1,10 @@
+"""
+es21.broadcast
+==============
+
+Utilities for many view.
+"""
+
 from functools import wraps
 
 from flask import (

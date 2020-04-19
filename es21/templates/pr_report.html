@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% include "includes/navbar.html" %}
+<div class="bg-dark text-light">
+    <div class="container-md">
+        <div class="d-flex flex-row my-3">
+            {# num block #}
+            <div class="d-flex flex-shrink-1 bg-primary flex-column p-3">
+                <div class="text-light h1">{{ pr['id'] }}</div>
+                <a class="text-light h2 mt-auto text-center" href="">{{ pr['groupe'] }}</a>
+            </div>
+            {# name title #}
+            <div class="p-3 pl-2 pl-sm-3 pl-md-5 pb-0">
+                <a class="h1 mb-0 text-decoration-none text-reset" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
+                    {% if pr['anarana_feno'] == "" %}
+                    {{ pr['anarana']}} <strong>{{ pr['fanampinanarana'] }}</strong>
+                    {% else %}
+                    {{ pr['anarana_feno'] }}
+                    {% endif %}
+                </a>
+
+                <div class="mb-3">
+                    {% if pr['tombotsoa'] %}
+                    <a href="" class="badge rounded-pill bg-primary text-light">{{ pr['tombotsoa'] }}</a>
+                    {% endif %}
+                    {% if pr['maharitra'] %}
+                    <a href="" class="badge rounded-pill bg-warning text-dark">Mpisavalalana Maharitra</a>
+                    {% endif %}
+                </div>
+
+                <div class="collapse multi-collapse" id="info">
+                    <div class="d-flex">
+                        <a class="btn btn-light d-flex mr-2" href=""><i class="material-icons">edit</i></a>
+                        <button type="button" class="btn btn-danger d-flex mr-2" data-toggle="modal" data-target="#deleteModal">
+                            <i class="material-icons">delete</i>
+                        </button>
+
+                        <button
+                            class="btn btn-light d-flex"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#mpanampyModal"
+                            {% if pr['maharitra'] %}disabled{% endif %}>
+                                <i class="material-icons mr-sm-2">add</i>
+                                <span class="d-none d-sm-inline">Mpisavalalala Mpanampy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a class="h1 mb-0 text-decoration-none text-reset" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
+                    <div class="d-flex flex-column my-0 py-0">
+                        <div class="collapse show multi-collapse mx-auto my-0 py-0">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                        <div class="collapse multi-collapse mx-auto mt-3 py-0">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include "includes/footer.html" %}
+{% endblock %}

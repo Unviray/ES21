@@ -2,15 +2,22 @@
 
 
 {% block body %}
+
 {% include 'includes/navbar.html' %}
+
 <div class="bg-dark text-light mt-0 mb-4">
     <div class="container py-4">
         <form class="form-inline d-flex" method="post">
             <label class="h3" for="search">Hitady</label>
-            <div class="bg-white flex-grow-1 d-flex ml-4 rounded">
+            <div class="bg-white flex-grow-1 d-flex mx-3 mx-md-5 rounded">
                 <button class="btn btn-light my-0 d-flex rounded-0 rounded-left" type="submit"><i class="material-icons">search</i></button>
-                <input class="form-control bg-light border-light flex-grow-1 rounded-0 rounded-right pl-0" name="search" type="search" placeholder="Hitady" aria-label="Search">
+                <input class="form-control bg-light border-light flex-grow-1 rounded-0 rounded-right pl-0" name="search" type="search" value="{{ value }}" placeholder="Hitady" aria-label="Search">
             </div>
+
+            <button class="btn btn-outline-light d-flex" type="button">
+                <p class="mb-0 d-none d-sm-block mr-2">Sivana</p>
+                <i class="material-icons">filter_list</i>
+            </button>
         </form>
     </div>
 </div>
@@ -24,4 +31,7 @@
         {% endfor %}
     </div>
 </div>
+
+{% include 'includes/footer.html' %}
+
 {% endblock %}
