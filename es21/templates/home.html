@@ -6,7 +6,7 @@
     <div class="col-lg-9">
         <a class="text-decoration-none mb-3" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
             <div class="jumbotron accordion bg-dark text-light p-3 p-sm-4 p-md-5 rounded">
-                <h1 class="display-4">{{ app.config['MONTH'] }}</h1>
+                <h1 class="display-4">{{ app.config['MONTH'].prettie() }}</h1>
                 <div class="collapse show multi-collapse">
                     <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
                 </div>
@@ -14,7 +14,59 @@
                 <p>Isan'ny mpitory: {{ len(preacher) }}</p>
 
                 <div class="collapse multi-collapse">
-                    table
+                    <table class="table table-dark text-right">
+                        <caption>Tsy namerina tatitra: {{ len(preacher) - post.tot['isa'] }}</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Isa</th>
+                                <th scope="col">ZVN</th>
+                                <th scope="col">VID</th>
+                                <th scope="col">ORA</th>
+                                <th scope="col">FTS</th>
+                                <th scope="col">FAP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="text-left" scope="row">Mpitory</th>
+                                <td>{{ post.non['isa'] }}</td>
+                                <td>{{ post.non['zvn'] }}</td>
+                                <td>{{ post.non['vid'] }}</td>
+                                <td>{{ post.non['ora'] }}</td>
+                                <td>{{ post.non['fit'] }}</td>
+                                <td>{{ post.non['fam'] }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-left" scope="row">Mpanampy</th>
+                                <td>{{ post.aux['isa'] }}</td>
+                                <td>{{ post.aux['zvn'] }}</td>
+                                <td>{{ post.aux['vid'] }}</td>
+                                <td>{{ post.aux['ora'] }}</td>
+                                <td>{{ post.aux['fit'] }}</td>
+                                <td>{{ post.aux['fam'] }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-left" scope="row">Maharitra</th>
+                                <td>{{ post.reg['isa'] }}</td>
+                                <td>{{ post.reg['zvn'] }}</td>
+                                <td>{{ post.reg['vid'] }}</td>
+                                <td>{{ post.reg['ora'] }}</td>
+                                <td>{{ post.reg['fit'] }}</td>
+                                <td>{{ post.reg['fam'] }}</td>
+                            </tr>
+                            <tr class="table-active">
+                                <th class="text-left" scope="row">Total</th>
+                                <td>{{ post.tot['isa'] }}</td>
+                                <td>{{ post.tot['zvn'] }}</td>
+                                <td>{{ post.tot['vid'] }}</td>
+                                <td>{{ post.tot['ora'] }}</td>
+                                <td>{{ post.tot['fit'] }}</td>
+                                <td>{{ post.tot['fam'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
 
                 <div class="d-flex flex-column my-0 py-0">

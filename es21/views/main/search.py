@@ -1,3 +1,10 @@
+"""
+es21.views.main.search
+======================
+
+Fetch and search through list of preacher.
+"""
+
 import re
 
 from flask import request
@@ -6,7 +13,7 @@ from markupsafe import Markup
 
 from tinydb import Query
 
-from ...broadcast import templated, navbar_form
+from ...utils import templated, navbar_form
 from ...database import get_db
 
 

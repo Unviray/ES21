@@ -34,7 +34,7 @@ class MonthBase(object):
         'nov',
         'dec', )
 
-    FORMAT = '{month} {year}'
+    FORMAT = '{short_month}_{year}'
 
     def __init__(self, obj):
         """
@@ -54,6 +54,23 @@ class MonthBase(object):
     @property
     def year(self):
         return self.data.year
+
+    def prettie(self, _format=None):
+        """
+        Return month string in requested :param _format:
+        """
+
+        _format = _format or '{month} {year}'
+
+        # - 1 because index start with 0
+        m = self.MONTH_NAME[self.data.month - 1]
+        y = self.data.year
+
+        return _format.format(
+            short_month=month_name.get(m),
+            month=month_short2long.get(m).title(),
+            year=y
+        )
 
     def __str__(self):
         # - 1 because index start with 0

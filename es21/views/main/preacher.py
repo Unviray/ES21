@@ -1,6 +1,13 @@
+"""
+es21.views.main.preacher
+========================
+
+Show stat and report of preacher.
+"""
+
 from tinydb import Query
 
-from ...broadcast import templated, navbar_form
+from ...utils import templated, navbar_form
 from ...database import get_db
 
 
