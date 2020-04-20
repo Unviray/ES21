@@ -13,7 +13,9 @@ class Filter(object):
         self.preachers = preachers
         self.filters = dict()  # list of registered filters
         self.filtered_by = []  # list of executed filters
+
         self.register_filter(returned)
+        self.register_filter(not_returned)
 
     def __call__(self, filter_name, *args, **kwargs):
         """
@@ -40,6 +42,7 @@ def returned(month=None):
     :return: a function for filter()
     """
 
+    # TODO: change this to a decorator 'with_month'
     month = month or str(app.config['MONTH'])
 
     def func(preacher):
@@ -49,5 +52,25 @@ def returned(month=None):
 
         except KeyError:
             return False
+
+    return func
+
+
+def not_returned(month=None):
+    """
+    Check if preacher return his report
+    :return: a function for filter()
+    """
+
+    # TODO: change this to a decorator 'with_month'
+    month = month or str(app.config['MONTH'])
+
+    def func(preacher):
+        try:
+            hour = preacher['tatitra'][month]['ora']
+            return hour == 0
+
+        except KeyError:
+            return True
 
     return func

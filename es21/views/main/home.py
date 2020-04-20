@@ -30,12 +30,18 @@ def entry():
         return render('welcome.html')
 
     # Post Report table widget
-    f = Filter(db.all())  # init filter
-    f('returned')  # do filtering with returned
-    tri = tri_pionner(f.preachers)  # sort filtered preacher
-    post = post_report(tri)  # produce widgets
+    f = Filter(db.all())
+    f('returned')
+    tri = tri_pionner(f.preachers)
+    post = post_report(tri)
+
+    # No report widget
+    f = Filter(db.all())
+    f('not_returned')
+    not_returned = f.preachers
 
     return dict(
+        not_returned=not_returned,
         preacher=preacher,
         post=post, )
 
