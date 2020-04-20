@@ -3,7 +3,7 @@
 
 {% block body %}
 {% include "includes/navbar.html" %}
-<div class="bg-dark text-light">
+<div class="bg-dark text-light mb-3">
     <div class="container-md">
         <div class="d-flex flex-row my-3">
             {# num block #}
@@ -64,6 +64,67 @@
     </div>
 </div>
 
+<div class="container-md">
+    <div class="row">
+        <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#tatitraModal">
+                {% if has_report %}
+                Hanavao tatitra
+                {% else %}
+                Hampiditra tatitra
+                {% endif %}
+            </button>
+
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                        {% for month in report %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
+                                {{ month|month_name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-8">
+            <div class="tab-content" id="myTabContent">
+                {% for month in report %}
+                <div class="tab-pane fade" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
+                    <h3 class="h4">
+                        {{ month|month_name }}
+                    <span class="badge rounded-pill bg-primary text-light">{{ report[month]['mpisavalalana'] }}</span>
+                    </h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Zavatra napetraka: </strong> {{ report[month]['zavatra_napetraka'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Video: </strong> {{ report[month]['video'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Ora: </strong> {{ report[month]['ora'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fitsidihana: </strong> {{ report[month]['fitsidihana'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fampianarana: </strong> {{ report[month]['fampianarana'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fanamarihana: </strong> {{ report[month]['fanamarihana'] }}
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% include "includes/footer.html" %}
 {% endblock %}

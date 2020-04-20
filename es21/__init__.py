@@ -5,23 +5,14 @@ es21
 Root of entire project include app factory (create_app).
 """
 
-from random import randint
-
 from flask import (
     Flask,
     url_for as url, )
 
-from . import (
-    config,
-    database, )
+from . import tfilter
+from . import config, database
 
-from .views import (
-    main, )
-
-
-def load_views(app):
-    app.register_blueprint(main.bp)
-    app.add_url_rule('/', endpoint='home')
+from .views import main
 
 
 def create_app(test_config=None):
@@ -35,15 +26,24 @@ def create_app(test_config=None):
     database.init_app(app)
 
     load_views(app)
+    load_template_filter(app)
 
     @app.context_processor
     def processor():
         return dict(
             len=len,
             round=round,
-            rand10=lambda: randint(0, 100) < 100,
             url=url,
             app=app,
         )
 
     return app
+
+
+def load_views(app):
+    app.register_blueprint(main.bp)
+    app.add_url_rule('/', endpoint='home')
+
+
+def load_template_filter(app):
+    app.add_template_filter(tfilter.month_name)
