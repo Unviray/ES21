@@ -59,3 +59,25 @@ month_long2short = {
     'november': 'nov',
     'december': 'des',
 }
+
+
+month_list = (
+    'janoary',
+    'febroary',
+    'martsa',
+    'aprily',
+    'may',
+    'jona',
+    'jolay',
+    'aogositra',
+    'septambra',
+    'oktobra',
+    'novambra',
+    'desambra',
+)
+
+
+ps_short2long = {
+    'reg': 'mpisavalalana maharitra',
+    'aux': 'mpisavalalana mpanampy',
+}

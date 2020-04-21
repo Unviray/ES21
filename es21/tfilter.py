@@ -16,3 +16,15 @@ def month_name(mn):
         return f'{m.capitalize()} {year}'
     except IndexError:
         return mn.capitalize()
+
+
+def date(d):
+    """
+    Convert date object to prettie string.
+    """
+
+    day = d.day
+    month = active.month_list[d.month - 1]
+    year = d.year
+
+    return f'{day} {month.title()} {year}'

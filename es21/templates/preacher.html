@@ -3,7 +3,7 @@
 
 {% block body %}
 {% include "includes/navbar.html" %}
-<div class="bg-dark text-light mb-3">
+<div class="bg-dark text-light">
     <div class="container-md">
         <div class="d-flex flex-row my-3">
             {# num block #}
@@ -66,61 +66,110 @@
 
 <div class="container-md">
     <div class="row">
-        <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
+        <div class="col-md-9 mt-3">
+            <div class="row">
+                <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#tatitraModal">
-                {% if has_report %}
-                Hanavao tatitra
-                {% else %}
-                Hampiditra tatitra
-                {% endif %}
-            </button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#tatitraModal">
+                        {% if has_report %}
+                        Hanavao tatitra
+                        {% else %}
+                        Hampiditra tatitra
+                        {% endif %}
+                    </button>
 
-            <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                                {% for month in report %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
+                                        {{ month|month_name }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-md-8">
+                    <div class="tab-content" id="myTabContent">
                         {% for month in report %}
-                        <li class="nav-item">
-                            <a class="nav-link" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
+                        <div class="tab-pane fade" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
+                            <h3 class="h4">
                                 {{ month|month_name }}
-                            </a>
-                        </li>
+                            <span class="badge rounded-pill bg-primary text-light">{{ report[month]['mpisavalalana'] }}</span>
+                            </h3>
+
+                            <table class="table table-bordered">
+                                <caption>{{ report[month]['fanamarihana'] }}</caption>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Zavatra napetraka</th>
+                                        <td>{{ report[month]['zavatra_napetraka'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Video</th>
+                                        <td>{{ report[month]['video'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Ora</th>
+                                        <td>{{ report[month]['ora'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Fitsidihana</th>
+                                        <td>{{ report[month]['fitsidihana'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Fampianarana</th>
+                                        <td>{{ report[month]['fampianarana'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-7 col-md-8">
-            <div class="tab-content" id="myTabContent">
-                {% for month in report %}
-                <div class="tab-pane fade" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
-                    <h3 class="h4">
-                        {{ month|month_name }}
-                    <span class="badge rounded-pill bg-primary text-light">{{ report[month]['mpisavalalana'] }}</span>
-                    </h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <strong>Zavatra napetraka: </strong> {{ report[month]['zavatra_napetraka'] }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Video: </strong> {{ report[month]['video'] }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Ora: </strong> {{ report[month]['ora'] }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Fitsidihana: </strong> {{ report[month]['fitsidihana'] }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Fampianarana: </strong> {{ report[month]['fampianarana'] }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Fanamarihana: </strong> {{ report[month]['fanamarihana'] }}
-                        </li>
+        <div class="col-md-3 order-first mt-md-3 order-md-last bg-dark text-light shadow p-4">
+            <div class="row">
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    <h3 class="h3"><i class="material-icons">phone</i> Tel</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['finday'][0] }}</li>
+                        <li>{{ pr['finday'][1] }}</li>
+                        <li>{{ pr['finday'][2] }}</li>
                     </ul>
                 </div>
-                {% endfor %}
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['adiresy'] %}
+                    <h3 class="h3"><i class="material-icons">place</i> Adiresy</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['adiresy'] }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['teraka'] %}
+                    <h3 class="h3"><i class="material-icons">today</i> Teraka</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['teraka']|date }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['batisa'] %}
+                    <h3 class="h3"><i class="material-icons">today</i> Batisa</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['batisa']|date }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
