@@ -7,35 +7,48 @@ Show stat and report of preacher.
 
 from collections import OrderedDict
 
-from flask import current_app as app
+from flask import (
+    redirect,
+    url_for as url,
+    current_app as app, )
 from werkzeug.exceptions import abort
 from tinydb import Query
 
 from ...utils import templated, navbar_form
 from ...database import get_db
+from ...forms import ReportForm
 
 from ...filters import returned
+
+
+q = Query()
 
 
 @templated('preacher.html')
 @navbar_form
 def entry(id):
+    MONTH = str(app.config['MONTH'])
     db = get_db()
-    q = Query()
+    preacher = db.get(q.id == id)
 
-    result = db.get(q.id == id)
-
-    if result is None:
+    if preacher is None:
         abort(404)
 
-    report = sort_month(result['tatitra'])
+    report = sort_month(preacher['tatitra'])
 
-    has_report = returned(str(app.config['MONTH']))(result)
+    has_report = returned(MONTH)(preacher)
+
+    report_handler = ReportHandler(ReportForm, preacher, has_report)
+    pushed = report_handler.push()
+
+    if pushed:
+        redirect(url('main.preacher', id=id))
 
     return dict(
-        pr=result,
+        pr=preacher,
         report=report,
-        has_report=has_report, )
+        has_report=has_report,
+        form=report_handler.form, )
 
 
 def sort_month(report, revers=True):
@@ -77,3 +90,83 @@ def sort_month(report, revers=True):
 
     else:
         return result_year
+
+
+class ReportHandler(object):
+    """
+    Handler for report that create new report or update existing report.
+    """
+
+    def __init__(self, form_class, preacher, has_report):
+        MONTH = str(app.config['MONTH'])
+
+        self.form_class = form_class
+        self.preacher = preacher
+        self.has_report = has_report
+
+        if self.has_report:
+            self.report = preacher['tatitra'][MONTH]
+
+        self.init_report()
+
+    def init_pionner(self):
+        MONTH = str(app.config['MONTH'])
+
+        if self.has_report:
+            return False
+
+        mdb = get_db('mpanampy')
+
+        if self.preacher.get('maharitra', False):
+            return 'Reg'
+
+        elif self.preacher['id'] in mdb.get(q.volana == MONTH)['mpitory']:
+            return 'Aux'
+
+        else:
+            return False
+
+    def init_report(self):
+        if not self.has_report:
+            pionner = self.init_pionner()
+            if pionner:
+                self.form = self.form_class(pionner)
+            else:
+                self.form = self.form_class()
+
+        else:
+            self.form = self.form_class(
+                publication=self.report['zavatra_napetraka'],
+                video=self.report['video'],
+                hour=self.report['ora'],
+                visit=self.report['fitsidihana'],
+                study=self.report['fampianarana'],
+                remark=self.report['fanamarihana'],
+                pionner=self.report['mpisavalalana'],
+            )
+
+    def push(self):
+        MONTH = str(app.config['MONTH'])
+        db = get_db()
+
+        if self.form.validate_on_submit():
+            data = {
+                'zavatra_napetraka': self.form.publication.data,
+                'video': self.form.video.data,
+                'ora': self.form.hour.data,
+                'fitsidihana': self.form.visit.data,
+                'fampianarana': self.form.study.data,
+                'fanamarihana': self.form.remark.data,
+                'mpisavalalana': self.form.pionner.data, }
+
+            def add_month(volana, data):
+                def transform(doc):
+                    doc['tatitra'][MONTH] = data
+
+                return transform
+
+            db.update(add_month(MONTH, data), q.id == self.preacher['id'])
+            return True
+
+        else:
+            return False

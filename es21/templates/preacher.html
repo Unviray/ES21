@@ -71,7 +71,7 @@
                 <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#tatitraModal">
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
                         {% if has_report %}
                         Hanavao tatitra
                         {% else %}
@@ -174,6 +174,91 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Tatitra volana: <strong>{{ app.config['MONTH'].prettie() }}</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" novalidate>
+                <div class="modal-body bg-light">
+                    {{ form.csrf_token }}
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            {{ form.publication.label }}
+                        </div>
+                        <div class="col-3">
+                           {{ form.publication(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            {{ form.video.label }}
+                        </div>
+                        <div class="col-3">
+                            {{ form.video(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            {{ form.hour.label }}
+                        </div>
+                        <div class="col-3">
+                          {{ form.hour(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            {{ form.visit.label }}
+                        </div>
+                        <div class="col-3">
+                         {{ form.visit(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            {{ form.study.label }}
+                        </div>
+                        <div class="col-3">
+                         {{ form.study(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.remark.label }}
+                        {{ form.remark(class="form-control") }}
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-6 col-md-7">
+                            {{ form.pionner.label }}
+                        </div>
+                        <div class="col-6 col-md-5">
+                            {{ form.pionner(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex flex-row">
+                    <button type="button" class="btn btn btn-secondary" data-dismiss="modal">Hiverina</button>
+                    <button type="submit" class="btn btn-primary flex-grow-1">
+                        {% if stat %}
+                        Havaozina
+                        {% else %}
+                        Hampidirina
+                        {% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% include "includes/footer.html" %}
 {% endblock %}
