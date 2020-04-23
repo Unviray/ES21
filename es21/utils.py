@@ -11,6 +11,7 @@ from flask import (
     request,
     redirect,
     url_for as url,
+    current_app as app,
     render_template as render, )
 
 
@@ -45,6 +46,15 @@ def navbar_form(f):
             try:
                 value = request.form['search']
                 return redirect(url('main.search', value=value))
+            except KeyError:
+                pass
+
+            try:
+                if request.form['month']:
+                    y = request.form['month'].split('-')[0]
+                    m = request.form['month'].split('-')[1]
+
+                    app.config['MONTH'].__init__(f'{m}_{y}')
             except KeyError:
                 pass
 

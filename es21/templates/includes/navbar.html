@@ -7,6 +7,13 @@
         </button>
 
         <div class="collapse navbar-collapse d-md-flex" id="navbarContent">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item mr-2 mb-2 mb-md-0">
+                    <a class="btn btn-outline-secondary" href="#monthModal" data-toggle="modal" data-target="#monthModal">
+                        {{ app.config['MONTH'].prettie() }}
+                    </a>
+                </li>
+            </ul>
             {% if not hide_search %}
             <form class="form-inline btn-group ml-auto bg-white rounded" method="post">
                 <button class="btn btn-light my-2 my-sm-0 d-flex rounded-0 rounded-left" type="submit"><i class="material-icons">search</i></button>
@@ -16,3 +23,22 @@
         </div>
     </div>
 </nav>
+
+
+<div class="modal fade" id="monthModal" tabindex="-1" role="dialog" aria-labelledby="monthModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="monthModalLabel">Volana iasana</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-inline justify-content-center m-3" method="post">
+                <input class="form-control mr-2" name="month" type="month" placeholder="Volana" aria-label="month">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Hanova</button>
+            </form>
+        </div>
+    </div>
+</div>

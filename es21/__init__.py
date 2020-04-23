@@ -34,8 +34,7 @@ def create_app(test_config=None):
             len=len,
             round=round,
             url=url,
-            app=app,
-        )
+            app=app, )
 
     return app
 

@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/material-icons.css') }}">
+        <link rel="stylesheet" href="{{ url('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url('static', filename='css/material-icons.css') }}">
 
         {% block style %}{% endblock %}
 
@@ -27,9 +27,9 @@
 
         {% include "includes/toast.html" %}
 
-        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/Chart.min.js') }}""></script>
+        <script src="{{ url('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url('static', filename='js/Chart.min.js') }}""></script>
 
         <script>
             var toastElList = [].slice.call(document.querySelectorAll('.toast'))

@@ -43,9 +43,17 @@ class MonthBase(object):
 
         if isinstance(obj, date):
             self.data = obj
+
         elif isinstance(obj, str):
-            month, year = obj.split('_')
-            self.data = date(year, month, 1)  # day 1 is ignored
+            month, year = obj.split('_' if '_' in obj else '-')
+
+            if month.isdigit():
+                self.data = date(int(year), int(month), 1)  # day 1 is ignored
+            else:
+                self.data = date(
+                    year=year,
+                    month=self.MONTH_NAME.index(month) + 1,
+                    day=1, )  # day 1 is ignored
 
     @property
     def month(self):

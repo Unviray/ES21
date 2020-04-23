@@ -138,9 +138,9 @@
                 <div class="mb-4 col-6 col-sm-3 col-md-12">
                     <h3 class="h3"><i class="material-icons">phone</i> Tel</h3>
                     <ul class="list-unstyled">
-                        <li>{{ pr['finday'][0] }}</li>
-                        <li>{{ pr['finday'][1] }}</li>
-                        <li>{{ pr['finday'][2] }}</li>
+                        {% for phone in pr['finday'] %}
+                            <li>{{ phone }}</li>
+                        {% endfor %}
                     </ul>
                 </div>
 
