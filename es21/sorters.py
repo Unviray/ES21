@@ -23,13 +23,14 @@ def tri_pionner(preachers, month=None):
 
     mdb = get_db('mpanampy')
     month = month or str(app.config['MONTH'])
+    aux_list = mdb.get(q.volana == month)['mpitory']
 
     non = []  # basic preachers
     aux = []  # auxiliar pionner
     reg = []  # permanent pionner
 
     for preacher in preachers:
-        if preacher['id'] in mdb.get(q.volana == month)['mpitory']:
+        if preacher['id'] in aux_list:
             aux.append(preacher)
 
         elif preacher['maharitra']:
