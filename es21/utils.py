@@ -43,13 +43,13 @@ def navbar_form(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if request.method == 'POST':
-            try:
+            try:  # Search form
                 value = request.form['search']
                 return redirect(url('main.search', value=value))
             except KeyError:
                 pass
 
-            try:
+            try:  # Month form
                 if request.form['month']:
                     y = request.form['month'].split('-')[0]
                     m = request.form['month'].split('-')[1]

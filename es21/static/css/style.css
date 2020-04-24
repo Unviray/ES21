@@ -9,3 +9,11 @@
 html, body {
     height: 100%;
 }
+
+.rounded-pill {
+    border: 2px solid #00000000;
+}
+.rounded-pill:hover {
+    border: 2px solid #2d00cfa9;
+}
+

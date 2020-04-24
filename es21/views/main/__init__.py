@@ -9,6 +9,7 @@ Many view here accept POST method for search in navbar or other POST.
 from flask import Blueprint
 
 from . import (
+    new,
     home,
     search,
     preacher, )
@@ -33,4 +34,10 @@ bp.add_url_rule(
     '/mpitory/<int:id>/',
     'preacher',
     preacher.entry,
+    methods=('POST', 'GET'))
+
+bp.add_url_rule(
+    '/mpitory-vaovao',
+    'new',
+    new.entry,
     methods=('POST', 'GET'))

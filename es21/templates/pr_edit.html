@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+
+{% block container %}
+<h2 class="h2 my-3">{{ title }}</h2>
+<form method="post" novalidate>
+    {{ form.csrf_token }}
+    <div class="row d-flex">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Mombamomba</h5>
+
+                    <div class="mb-3" id="last_name">
+                        {{ form.last_name.label }}
+                        {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.last_name(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.last_name.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="first_name">
+                        {{ form.first_name.label }}
+                        {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.first_name(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.first_name.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3" id="gender">
+                                {{ form.gender.label }}
+                                {% if form.gender.errors %}
+                                {{ form.gender(class="form-control is-invalid") }}
+                                {% else %}
+                                {{ form.gender(class="form-control") }}
+                                {% endif %}
+                                {% for error in form.gender.errors %}
+                                <div class="is-invalid text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3" id="id">
+                                {{ form.id.label }}
+                                {% if form.id.errors %}
+                                {{ form.id(class="form-control is-invalid") }}
+                                {% else %}
+                                {{ form.id(class="form-control") }}
+                                {% endif %}
+                                {% for error in form.id.errors %}
+                                <div class="is-invalid text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Daty</h5>
+
+                    <div class="mb-3" id="birth">
+                        {{ form.birth.label }}
+                        {% if form.birth.errors %}
+                        {{ form.birth(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.birth(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.birth.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="baptism">
+                        {{ form.baptism.label }}
+                        {% if form.baptism.errors %}
+                        {{ form.baptism(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.baptism(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.baptism.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Fifandraisana</h5>
+
+                    <div class="mb-3" id="phone1">
+                        {{ form.phone1.label }}
+                        {% if form.phone1.errors %}
+                        {{ form.phone1(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.phone1(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.phone1.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="phone2">
+                        {{ form.phone2.label }}
+                        {% if form.phone2.errors %}
+                        {{ form.phone2(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.phone2(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.phone2.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="phone3">
+                        {{ form.phone3.label }}
+                        {% if form.phone3.errors %}
+                        {{ form.phone3(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.phone3(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.phone3.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="address">
+                        {{ form.address.label }}
+                        {% if form.address.errors %}
+                        {{ form.address(class="form-control is-invalid") }}
+                        {% else %}
+                        {{ form.address(class="form-control") }}
+                        {% endif %}
+                        {% for error in form.address.errors %}
+                        <div class="is-invalid text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Fiangonana</h5>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="mb-3" id="promo">
+                                {{ form.promo.label }}
+                                {% if form.promo.errors %}
+                                {{ form.promo(class="form-control is-invalid") }}
+                                {% else %}
+                                {{ form.promo(class="form-control") }}
+                                {% endif %}
+                                {% for error in form.promo.errors %}
+                                <div class="is-invalid text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="mb-3" id="group">
+                                {{ form.group.label }}
+                                {% if form.group.errors %}
+                                {{ form.group(class="form-control is-invalid") }}
+                                {% else %}
+                                {{ form.group(class="form-control") }}
+                                {% endif %}
+                                {% for error in form.group.errors %}
+                                <div class="is-invalid text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="mb-3 d-flex flex-column" id="permanent_pionner">
+                                {{ form.permanent_pionner.label(class="form-check-label mb-3") }}
+                                {% if form.permanent_pionner.errors %}
+                                {{ form.permanent_pionner(class="form-control mx-auto is-invalid") }}
+                                {% else %}
+                                {{ form.permanent_pionner(class="form-check-input mx-auto") }}
+                                {% endif %}
+                                {% for error in form.permanent_pionner.errors %}
+                                <div class="is-invalid text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Hampidirina</button>
+</form>
+{% endblock %}
