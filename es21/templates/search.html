@@ -7,18 +7,26 @@
 
 <div class="bg-dark text-light mt-0 mb-4">
     <div class="container py-4">
-        <form class="form-inline d-flex" method="post">
-            <label class="h3" for="search">Hitady</label>
-            <div class="bg-white flex-grow-1 d-flex mx-3 mx-md-5 rounded">
+        <form class="form-inline" method="post">
+            <label class="h3 d-none d-sm-block" for="search">Hitady</label>
+            <div class="bg-white flex-grow-1 d-flex mx-0 mx-sm-3 mx-md-5 rounded">
                 <button class="btn btn-light my-0 d-flex rounded-0 rounded-left" type="submit"><i class="material-icons">search</i></button>
                 <input class="form-control bg-light border-light flex-grow-1 rounded-0 rounded-right pl-0" name="search" type="search" value="{{ value }}" placeholder="Hitady" aria-label="Search">
             </div>
 
-            <button class="btn btn-outline-light d-flex" type="button">
+            <button class="btn btn-outline-light ml-3 d-flex" type="button" data-toggle="collapse" data-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
                 <p class="mb-0 d-none d-sm-block mr-2">Sivana</p>
                 <i class="material-icons">filter_list</i>
             </button>
         </form>
+
+        <div class="collapse {% if on_ft %}show{% endif %} mt-4" id="filterCollapse">
+            {% for filter in all_ft %}
+                <a class="btn btn{{ is_active(filter) }}-light btn-sm filter" type="button" href="{% if filter in on_ft %}{{ remove_f(filter) }}{% else %}{{ add_f(filter) }}{% endif %}">
+                    {{ filter.capitalize() }}
+                </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

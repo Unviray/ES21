@@ -41,3 +41,9 @@ bp.add_url_rule(
     'new',
     new.entry,
     methods=('POST', 'GET'))
+
+
+bp.add_url_rule(
+    '/preacher/<int:id>',
+    'pr_card',
+    search.get_pr_card, )

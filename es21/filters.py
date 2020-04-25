@@ -22,12 +22,14 @@ class Filter(object):
         Do filtering
         """
 
-        func = self.filters.get(filter_name, lambda: True)
+        func = self.filters.get(filter_name)
 
-        result = filter(func(*args, **kwargs), self.preachers)
-        self.preachers = list(result)
+        if func is not None:
+            # func(*args, **kwargs) produce a function
+            result = filter(func(*args, **kwargs), self.preachers)
+            self.preachers = list(result)
 
-        self.filtered_by.append(filter_name)
+            self.filtered_by.append(filter_name)
 
     def register_filter(self, filter_func, name=None):
         if name is not None:

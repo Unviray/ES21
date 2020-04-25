@@ -25,8 +25,7 @@ month_name = {
     'september': 'septambra',
     'october': 'oktobra',
     'november': 'novambra',
-    'december': 'desambra',
-}
+    'december': 'desambra', }
 
 
 month_short2long = {
@@ -41,8 +40,7 @@ month_short2long = {
     'sep': 'septambra',
     'oct': 'oktobra',
     'nov': 'novambra',
-    'dec': 'desambra',
-}
+    'dec': 'desambra', }
 
 
 month_long2short = {
@@ -57,8 +55,7 @@ month_long2short = {
     'september': 'sep',
     'october': 'okt',
     'november': 'nov',
-    'december': 'des',
-}
+    'december': 'des', }
 
 
 month_list = (
@@ -73,11 +70,18 @@ month_list = (
     'septambra',
     'oktobra',
     'novambra',
-    'desambra',
-)
+    'desambra', )
 
 
 ps_short2long = {
     'reg': 'mpisavalalana maharitra',
-    'aux': 'mpisavalalana mpanampy',
-}
+    'aux': 'mpisavalalana mpanampy', }
+
+
+filter_name = {
+    'returned': 'namerina',
+    'not_returned': 'tsy namerina', }
+
+reverse_filter_name = {
+    'namerina': 'returned',
+    'tsy namerina': 'not_returned', }
