@@ -28,3 +28,13 @@ def date(d):
     year = d.year
 
     return f'{day} {month.title()} {year}'
+
+
+def pionner_name(pcode):
+    """
+    Translate database pionner code to pretiie format
+    """
+
+    if pcode.istitle():
+        pcode = pcode.lower()
+    return active.pionner_short2long.get(pcode, pcode)

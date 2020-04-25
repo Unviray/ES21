@@ -84,7 +84,7 @@
                             <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                 {% for month in report %}
                                 <li class="nav-item">
-                                    <a class="nav-link" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
+                                    <a class="nav-link{% if loop.first %} active{% endif %}" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
                                         {{ month|month_name }}
                                     </a>
                                 </li>
@@ -96,10 +96,10 @@
                 <div class="col-sm-7 col-md-8">
                     <div class="tab-content" id="myTabContent">
                         {% for month in report %}
-                        <div class="tab-pane fade" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
-                            <h3 class="h4">
+                        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
+                            <h3 class="h4 mb-4">
                                 {{ month|month_name }}
-                            <span class="badge rounded-pill bg-primary text-light">{{ report[month]['mpisavalalana'] }}</span>
+                            <span class="badge rounded-pill bg-primary text-light text-capitalize">{{ report[month]['mpisavalalana']|pionner_name }}</span>
                             </h3>
 
                             <table class="table table-bordered">

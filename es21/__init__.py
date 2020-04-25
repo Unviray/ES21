@@ -62,4 +62,5 @@ def load_views(app):
 
 def load_template_filter(app):
     app.add_template_filter(tfilter.month_name)
+    app.add_template_filter(tfilter.pionner_name)
     app.add_template_filter(tfilter.date)

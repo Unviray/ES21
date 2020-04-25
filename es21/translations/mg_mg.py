@@ -73,7 +73,7 @@ month_list = (
     'desambra', )
 
 
-ps_short2long = {
+pionner_short2long = {
     'reg': 'mpisavalalana maharitra',
     'aux': 'mpisavalalana mpanampy', }
 
