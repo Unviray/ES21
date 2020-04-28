@@ -62,8 +62,9 @@ def navbar_form(f):
     return decorated_function
 
 
-def get_year(month=None):
+def get_service_year(month=None):
     """
+    Build service year from month.
     """
 
     MONTH = month or app.config['MONTH']

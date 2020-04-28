@@ -10,7 +10,7 @@
     <div class="container-md">
         <div class="d-flex flex-row my-3">
             {# num block #}
-            <div class="d-flex flex-shrink-1 bg-primary flex-column p-3">
+            <div class="d-flex flex-shrink-1 bg-{{ color_returned(pr) }} flex-column p-3">
                 <div class="text-light h1">{{ pr['id'] }}</div>
                 <a class="text-light h2 mt-auto text-center" href="">{{ pr['groupe'] }}</a>
             </div>
@@ -44,7 +44,7 @@
                             class="btn btn-light d-flex"
                             type="button"
                             data-toggle="modal"
-                            data-target="#mpanampyModal"
+                            data-target="#auxiliaryModal"
                             {% if pr['maharitra'] %}disabled{% endif %}>
                                 <i class="material-icons mr-sm-2">add</i>
                                 <span class="d-none d-sm-inline">Mpisavalalala Mpanampy</span>
@@ -293,6 +293,37 @@
                 <input class="form-control" name="name" type="text" aria-label="anarana">
                 <button class="btn btn-block btn-outline-danger mt-3" type="submit">Hamafa</button>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="auxiliaryModal" tabindex="-1" role="dialog" aria-labelledby="auxiliaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="auxiliaryModalLabel">
+                    Fampidirana mpisavalalana mpanampy
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" action="{{ url_for('auxiliary.edit', id=pr['id']) }}">
+                    <div class="row px-3">
+                        {% for month in months %}
+                        <div class="col-6 btn-group-toggle px-1 pb-1" data-toggle="buttons">
+                            <label class="btn btn-block btn-outline-secondary {{ month.active }}">
+                                <input type="checkbox" name="{{ month.id }}" id="{{ month.id }}" autocomplete="off" {{ month.checked }}>
+                                {{ month.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                <button class="btn btn-primary btn-block mt-2" type="submit">Hampidirina</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

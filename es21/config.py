@@ -51,7 +51,7 @@ class MonthBase(object):
                 self.data = date(int(year), int(month), 1)  # day 1 is ignored
             else:
                 self.data = date(
-                    year=year,
+                    year=int(year),
                     month=self.MONTH_NAME.index(month) + 1,
                     day=1, )  # day 1 is ignored
 
@@ -86,7 +86,8 @@ class MonthBase(object):
         y = self.data.year
 
         return self.FORMAT.format(
-            short_month=month_name.get(m),
+            # short_month=month_name.get(m),
+            short_month=m,
             month=month_short2long.get(m).title(),
             year=y
         )

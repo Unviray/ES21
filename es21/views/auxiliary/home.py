@@ -13,7 +13,7 @@ from ...utils import templated, navbar_form
 from ...database import get_db
 
 
-@templated()
+@templated('auxiliary/home.html')
 @navbar_form
 def entry():
     db = get_db()

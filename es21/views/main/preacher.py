@@ -5,7 +5,7 @@ es21.views.main.preacher
 Show stat and report of preacher.
 """
 
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 
 from flask import (
     redirect,
@@ -14,7 +14,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from tinydb import Query
 
-from ...utils import templated, navbar_form
+from ...utils import templated, navbar_form, get_service_year
 from ...database import get_db
 from ...forms import ReportForm
 
@@ -44,9 +44,12 @@ def entry(id):
     if pushed:
         redirect(url('main.preacher', id=id))
 
+    months = auxiliary_check(id)
+
     return dict(
         pr=preacher,
         report=report,
+        months=months,
         has_report=has_report,
         form=report_handler.form, )
 
@@ -170,3 +173,48 @@ class ReportHandler(object):
 
         else:
             return False
+
+
+def auxiliary_check(id):
+    """
+    Build checkable month for auxiliary.
+    """
+
+    mdb = get_db('mpanampy')
+    service_year = get_service_year()
+
+    MonthObj = namedtuple('MonthObj', ['active', 'id', 'checked', 'name'])
+
+    months = []
+    for service_month in service_year:
+        month = mdb.get(q.volana == str(service_month))
+
+        if month is None:
+            months.append(MonthObj(
+                active='',
+                id=str(service_month),
+                checked='',
+                name=service_month.prettie(), ))
+
+        elif month.get('mpitory') is None:
+            months.append(MonthObj(
+                active='',
+                id=str(service_month),
+                checked='',
+                name=service_month.prettie(), ))
+
+        elif id in month.get('mpitory'):  # Only active
+            months.append(MonthObj(
+                active='active',
+                id=str(service_month),
+                checked='checked',
+                name=service_month.prettie(), ))
+
+        else:
+            months.append(MonthObj(
+                active='',
+                id=str(service_month),
+                checked='',
+                name=service_month.prettie(), ))
+
+    return months
