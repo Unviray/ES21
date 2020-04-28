@@ -5,6 +5,9 @@ es21
 Root of entire project include app factory (create_app).
 """
 
+import logging
+from logging.handlers import RotatingFileHandler
+
 from flask import (
     Flask,
     url_for as url, )
@@ -12,7 +15,7 @@ from flask import (
 from . import tfilter
 from . import config, database
 
-from .views import main, auxiliary
+from .views import main, auxiliary, error
 
 
 def create_app(test_config=None):
@@ -27,6 +30,8 @@ def create_app(test_config=None):
 
     load_views(app)
     load_template_filter(app)
+    load_error_handler(app)
+    load_error_logger(app)
 
     @app.context_processor
     def processor():
@@ -65,3 +70,19 @@ def load_template_filter(app):
     app.add_template_filter(tfilter.month_name)
     app.add_template_filter(tfilter.pionner_name)
     app.add_template_filter(tfilter.date)
+
+
+def load_error_handler(app):
+    app.register_error_handler(404, error.page_not_found)
+    app.register_error_handler(500, error.server_error)
+
+
+def load_error_logger(app):
+    file_handler = RotatingFileHandler(app.config['LOG'])
+    file_handler.setLevel(logging.ERROR)
+    file_handler.setFormatter(logging.Formatter(
+        '[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
+    ))
+
+    if not app.debug:
+        app.logger.addHandler(file_handler)
