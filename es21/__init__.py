@@ -49,8 +49,7 @@ def create_app(test_config=None):
             else:
                 return 'danger' if hour == 0 else 'primary'
 
-        return dict(
-            color_returned=color_returned, )
+        return dict(color_returned=color_returned)
 
     return app
 

@@ -136,12 +136,14 @@
         <div class="col-md-3 order-first mt-md-3 order-md-last bg-dark text-light shadow p-4">
             <div class="row">
                 <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['finday'] != ["", "", ""] %}
                     <h3 class="h3"><i class="material-icons">phone</i> Tel</h3>
                     <ul class="list-unstyled">
                         {% for phone in pr['finday'] %}
                             <li>{{ phone }}</li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
 
                 <div class="mb-4 col-6 col-sm-3 col-md-12">
@@ -258,7 +260,37 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    Fanafoanana ny mpitory
+                    {{ pr['anarana']}} <strong>{{ pr['fanampinanarana'] }}</strong>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
+            <div class="modal-body">
+                <p>
+                    Tena tianao ve ny hamafa ny mpitory {{ pr['anarana']}} <strong>{{ pr['fanampinanarana'] }}</strong>
+                </p>
+                <div class="alert alert-danger" role="alert">
+                    Tadidio fa tsy ho azo averina intsony ny zavatra voafafa
+                </div>
+                <p class="mb-1">
+                    Soraty eto ambany ny anaran'ilay mpitory ho fanamafisana
+                </p>
+            </div>
+            <form class="justify-content-center mx-3 mb-3" method="post" action="{{ url_for('main.delete', id=pr['id']) }}">
+                <input class="form-control" name="name" type="text" aria-label="anarana">
+                <button class="btn btn-block btn-outline-danger mt-3" type="submit">Hamafa</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% include "includes/footer.html" %}
 {% endblock %}

@@ -11,6 +11,7 @@ from flask import Blueprint
 from . import (
     new,
     home,
+    delete,
     search,
     preacher, )
 
@@ -41,6 +42,12 @@ bp.add_url_rule(
     'new',
     new.entry,
     methods=('POST', 'GET'))
+
+bp.add_url_rule(
+    '/mpitory/<int:id>/hamafa',
+    'delete',
+    delete.entry,
+    methods=['POST'])
 
 
 bp.add_url_rule(
