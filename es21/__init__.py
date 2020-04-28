@@ -12,7 +12,7 @@ from flask import (
 from . import tfilter
 from . import config, database
 
-from .views import main
+from .views import main, auxiliary
 
 
 def create_app(test_config=None):
@@ -55,8 +55,10 @@ def create_app(test_config=None):
 
 
 def load_views(app):
-    app.register_blueprint(main.bp)
+    app.register_blueprint(main.blueprint)
     app.add_url_rule('/', endpoint='home')
+
+    app.register_blueprint(auxiliary.blueprint)
 
 
 def load_template_filter(app):

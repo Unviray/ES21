@@ -125,6 +125,12 @@ class MonthBase(object):
 
         return self
 
+    def new_me(self, obj=None):
+        if obj is not None:
+            return MonthBase(obj)
+        else:
+            return MonthBase(self.data)
+
 
 class Config(object):
     y = date.today().year

@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 
+{% block title %}ES21 - {{ pr['fanampinanarana'] }}{% endblock %}
+
+
 {% block body %}
 {% include "includes/navbar.html" %}
 <div class="bg-dark text-light">
@@ -71,13 +74,15 @@
                 <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
-                        {% if has_report %}
+                    {% if has_report %}
+                    <button type="button" class="btn btn-outline-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
                         Hanavao tatitra
-                        {% else %}
-                        Hampiditra tatitra
-                        {% endif %}
                     </button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
+                        Hampiditra tatitra
+                    </button>
+                    {% endif %}
 
                     <div class="card">
                         <div class="card-body">

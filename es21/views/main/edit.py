@@ -1,3 +1,10 @@
+"""
+es21.views.main.edit
+====================
+
+Edit/Update preacher's informations.
+"""
+
 from flask import redirect, url_for as url
 
 from tinydb import Query

@@ -60,3 +60,41 @@ def navbar_form(f):
 
         return f(*args, **kwargs)
     return decorated_function
+
+
+def get_year(month=None):
+    """
+    """
+
+    MONTH = month or app.config['MONTH']
+    year = MONTH.year
+
+    if MONTH.month in (9, 10, 11, 12):
+        return [
+            MONTH.new_me(f'sep_{year}'),
+            MONTH.new_me(f'oct_{year}'),
+            MONTH.new_me(f'nov_{year}'),
+            MONTH.new_me(f'dec_{year}'),
+            MONTH.new_me(f'jan_{year + 1}'),
+            MONTH.new_me(f'feb_{year + 1}'),
+            MONTH.new_me(f'mar_{year + 1}'),
+            MONTH.new_me(f'apr_{year + 1}'),
+            MONTH.new_me(f'may_{year + 1}'),
+            MONTH.new_me(f'jun_{year + 1}'),
+            MONTH.new_me(f'jul_{year + 1}'),
+            MONTH.new_me(f'aug_{year + 1}'), ]
+
+    else:
+        return [
+            MONTH.new_me(f'sep_{year - 1}'),
+            MONTH.new_me(f'oct_{year - 1}'),
+            MONTH.new_me(f'nov_{year - 1}'),
+            MONTH.new_me(f'dec_{year - 1}'),
+            MONTH.new_me(f'jan_{year}'),
+            MONTH.new_me(f'feb_{year}'),
+            MONTH.new_me(f'mar_{year}'),
+            MONTH.new_me(f'apr_{year}'),
+            MONTH.new_me(f'may_{year}'),
+            MONTH.new_me(f'jun_{year}'),
+            MONTH.new_me(f'jul_{year}'),
+            MONTH.new_me(f'aug_{year}'), ]

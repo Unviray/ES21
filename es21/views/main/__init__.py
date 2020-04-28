@@ -17,47 +17,47 @@ from . import (
     preacher, )
 
 
-bp = Blueprint('main', __name__)
+blueprint = Blueprint('main', __name__)
 
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/',
     'home',
     home.entry,
     methods=('GET', 'POST'))
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/fitadiavana',
     'search',
     search.entry,
     methods=('GET', 'POST'))
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/mpitory/<int:id>/',
     'preacher',
     preacher.entry,
     methods=('GET', 'POST'))
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/mpitory-vaovao',
     'new',
     new.entry,
     methods=('GET', 'POST'))
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/mpitory/<int:id>/hanavao',
     'edit',
     edit.entry,
     methods=('GET', 'POST'))
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/mpitory/<int:id>/hamafa',
     'delete',
     delete.entry,
     methods=['POST'])
 
 
-bp.add_url_rule(
+blueprint.add_url_rule(
     '/preacher/<int:id>',
     'pr_card',
     search.get_pr_card, )
