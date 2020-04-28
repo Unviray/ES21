@@ -6,6 +6,7 @@ Add/Remove/Update preacher in auxiliary pionner place.
 """
 
 from flask import (
+    flash,
     request,
     redirect,
     url_for as url, )
@@ -37,6 +38,8 @@ def entry(id):
             if id not in preacher:
                 preacher.append(id)
                 mdb.update(set('mpitory', preacher), q.volana == month)
+
+    flash('Tontosa ny fampidirana mpisavalalana mpanampy', 'success')
 
     return redirect(url('main.preacher', id=id))
 

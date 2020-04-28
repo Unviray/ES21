@@ -5,7 +5,10 @@ es21.views.main.edit
 Edit/Update preacher's informations.
 """
 
-from flask import redirect, url_for as url
+from flask import (
+    flash,
+    redirect,
+    url_for as url, )
 
 from tinydb import Query
 
@@ -57,6 +60,8 @@ def entry(id):
             'tatitra': preacher['tatitra'], }
 
         db.update(data, q.id == id)
+
+        flash('Tontosa ny fanavaozana ny mpitory', 'success')
 
         return redirect(url('main.preacher', id=form.id.data))
 

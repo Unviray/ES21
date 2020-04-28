@@ -8,9 +8,11 @@ Show stat and report of preacher.
 from collections import OrderedDict, namedtuple
 
 from flask import (
+    flash,
     redirect,
     url_for as url,
     current_app as app, )
+
 from werkzeug.exceptions import abort
 from tinydb import Query
 
@@ -42,7 +44,8 @@ def entry(id):
     pushed = report_handler.push()
 
     if pushed:
-        redirect(url('main.preacher', id=id))
+        flash("Tafiditra soaman'tsara ny tatitra", 'success')
+        return redirect(url('main.preacher', id=id))
 
     months = auxiliary_check(id)
 

@@ -54,7 +54,21 @@ def create_app(test_config=None):
             else:
                 return 'danger' if hour == 0 else 'primary'
 
-        return dict(color_returned=color_returned)
+        def color_contrast(c):
+            return {
+                'dark': 'white',
+                'danger': 'white',
+                'primary': 'white',
+                'secondary': 'white',
+                'light': 'dark',
+                'success': 'white',
+                'info': 'dark',
+                'warning': 'dark',
+            }.get(c, 'dark')
+
+        return dict(
+            color_returned=color_returned,
+            color_contrast=color_contrast, )
 
     return app
 

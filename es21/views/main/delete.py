@@ -6,6 +6,7 @@ Delete preacher.
 """
 
 from flask import (
+    flash,
     request,
     redirect,
     url_for as url, )
@@ -33,5 +34,7 @@ def entry(id):
     if name in pattern:
         db.remove(q.id == id)
         return redirect(url('home'))
+
+    flash('Tontosa ny fanafoanana ny mpitory', 'success')
 
     return redirect(url('main.preacher', id=id))

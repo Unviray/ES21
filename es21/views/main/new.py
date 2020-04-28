@@ -6,6 +6,7 @@ Creating new preacher.
 """
 
 from flask import (
+    flash,
     redirect,
     url_for as url, )
 
@@ -24,6 +25,9 @@ def entry():
 
     if pushed:
         id = new_preacher_handler.form.id.data
+
+        flash("Tafiditra soaman'tsara ny mpitory", 'success')
+
         return redirect(url('main.preacher', id=id))
 
     return dict(
