@@ -9,6 +9,7 @@ import re
 
 from flask import (
     request,
+    redirect,
     url_for as url, )
 
 from markupsafe import Markup
@@ -57,6 +58,9 @@ def entry():
 
     for qf in query_filters:
         ft(qf)
+
+    if len(ft.preachers) == 1:
+        return redirect(url('main.preacher', id=ft.preachers[0]['id']))
 
     all_ft = [active.filter_name[_] for _ in list(ft.filters)]
     on_ft = [active.filter_name[_] for _ in ft.filtered_by]

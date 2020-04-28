@@ -6,7 +6,6 @@ Delete preacher.
 """
 
 from flask import (
-    current_app as app,
     request,
     redirect,
     url_for as url, )
@@ -26,11 +25,11 @@ def entry(id):
     pattern = [
         f"{preacher['anarana']} {preacher['fanampinanarana']}",
         preacher['anarana'],
-        preacher['fanampinanarana'],
-        preacher['anarana_feno'], ]
+        preacher['fanampinanarana'], ]
 
-    app.logger.info(name)
-    app.logger.info(pattern)
+    if preacher['anarana_feno'] != '':
+        pattern.append(preacher['anarana_feno'])
+
     if name in pattern:
         db.remove(q.id == id)
         return redirect(url('home'))

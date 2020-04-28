@@ -7,6 +7,8 @@ Include all form used in es21.
 
 import re
 
+from flask import current_app as app
+
 from flask_wtf import FlaskForm
 from wtforms.widgets.core import Input
 from wtforms.validators import (
@@ -71,7 +73,7 @@ class ReportForm(FlaskForm):
         ('Reg', 'Maharitra'), ], )
 
 
-class NewPreacherForm(FlaskForm):
+class PreacherForm(FlaskForm):
     id = IntegerField('Nomerao', **int_kwargs)
 
     last_name = StringField('Anarana')
@@ -120,3 +122,11 @@ class NewPreacherForm(FlaskForm):
     def validate_phone3(self, field):
         if eval_phone(field.data) is None:
             raise ValidationError('Hamarino ny nomerao finday')
+
+
+class EditPreacherForm(PreacherForm):
+    last_id = IntegerField('Nomerao taloha', **int_kwargs)
+
+    def validate_id(self, field):
+        if self.last_id.data != field.data:
+            super(EditPreacherForm, self).validate_id(field)

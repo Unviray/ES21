@@ -13,7 +13,7 @@ from tinydb import Query
 
 from ...utils import templated, navbar_form
 from ...database import get_db
-from ...forms import NewPreacherForm
+from ...forms import PreacherForm
 
 
 @templated('pr_edit.html')
@@ -40,7 +40,7 @@ class NewPreacherHandler(object):
         while self.db.get(q.id == no_id) is not None:
             no_id += 1
 
-        self.form = NewPreacherForm(id=no_id)
+        self.form = PreacherForm(id=no_id)
 
     def push(self):
         if not self.form.validate_on_submit():

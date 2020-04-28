@@ -10,6 +10,7 @@ from flask import Blueprint
 
 from . import (
     new,
+    edit,
     home,
     delete,
     search,
@@ -35,13 +36,19 @@ bp.add_url_rule(
     '/mpitory/<int:id>/',
     'preacher',
     preacher.entry,
-    methods=('POST', 'GET'))
+    methods=('GET', 'POST'))
 
 bp.add_url_rule(
     '/mpitory-vaovao',
     'new',
     new.entry,
-    methods=('POST', 'GET'))
+    methods=('GET', 'POST'))
+
+bp.add_url_rule(
+    '/mpitory/<int:id>/hanavao',
+    'edit',
+    edit.entry,
+    methods=('GET', 'POST'))
 
 bp.add_url_rule(
     '/mpitory/<int:id>/hamafa',
