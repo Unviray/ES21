@@ -11,7 +11,7 @@ from flask import (
     current_app as app,
     render_template as render, )
 
-from ...utils import templated, navbar_form
+from ...utils import templated, navbar_form, get_service_year
 from ...database import get_db
 
 from ...sorters import tri_pionner
@@ -35,18 +35,19 @@ def entry():
     tri = tri_pionner(f.preachers)
     post = post_report(tri)
 
-    # No report widget
+    # No report
     f = Filter(db.all())
     f('not_returned')
     not_returned = f.preachers
 
     return dict(
+        hour_chart=hour_chart(preacher),
         not_returned=not_returned,
         preacher=preacher,
         post=post, )
 
 
-def post_report(preacher):
+def post_report(preachers):
     """
     Produce table main report table to post.
     :param preacher: list of tri sorted preacher
@@ -54,7 +55,7 @@ def post_report(preacher):
     'non, aux, reg, tot' properties.
     """
 
-    p = preacher
+    p = preachers
 
     MONTH = str(app.config['MONTH'])
 
@@ -92,3 +93,18 @@ def post_report(preacher):
 
     result = namedtuple('PostReport', ['non', 'aux', 'reg', 'tot'])
     return result(non, aux, reg, tot)
+
+
+def hour_chart(preachers):
+    service_year = get_service_year()
+    result = []
+
+    for month in service_year:
+        fr = Filter(preachers)
+        fr('returned', month=str(month))
+
+        s_hour = sum([pr['tatitra'][str(month)]['ora'] for pr in fr.preachers])
+
+        result.append((month.prettie('{short_month} {short_year}'), s_hour))
+
+    return result

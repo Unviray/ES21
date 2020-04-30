@@ -77,6 +77,7 @@ class MonthBase(object):
         return _format.format(
             short_month=month_name.get(m),
             month=month_short2long.get(m).title(),
+            short_year=str(y)[2:],
             year=y
         )
 
@@ -89,6 +90,7 @@ class MonthBase(object):
             # short_month=month_name.get(m),
             short_month=m,
             month=month_short2long.get(m).title(),
+            short_year=str(y)[2:],
             year=y
         )
 
