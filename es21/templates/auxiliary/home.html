@@ -4,57 +4,46 @@
 {% block container %}
 <div class="row">
     <div class="col-lg-9">
-        <a class="text-decoration-none" data-toggle="collapse" href=".multi-collapse" aria-expanded="false">
-            <div class="jumbotron accordion bg-dark text-light p-3 p-sm-4 p-md-5 rounded">
-                <h1 class="display-4">{{ MONTH.prettie() }}</h1>
+        {% macro content() %}
+        <div class="collapse show multi-collapse">
+            <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny Mpisavalalana mpanampy</p>
+        </div>
 
-                <div class="collapse show multi-collapse">
-                    <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny Mpisavalalana mpanampy</p>
-                </div>
+        <hr class="my-1 my-sm-4 bg-light">
+        <p>Isan'ny mpisavalalana mpanampy <span class="badge bg-secondary">{{ len(preachers) }}</span></p>
 
-                <hr class="my-1 my-sm-4 bg-light">
-                <p>Isan'ny mpisavalalana mpanampy <span class="badge bg-secondary">{{ len(preachers) }}</span></p>
+        <div class="collapse multi-collapse">
+            <table class="table table-dark table-sm text-right">
+                <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(not_returned) }}</span></caption>
+                <thead>
+                    <tr>
+                        <th class="text-left" scope="col">Anarana</th>
+                        <th scope="col">ZVN</th>
+                        <th scope="col">VID</th>
+                        <th scope="col">ORA</th>
+                        <th scope="col">FTS</th>
+                        <th scope="col">FAP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for preacher in indiv_report %}
+                    <tr class="{% if preacher.hour == 0 %} text-muted{% endif %}">
+                        <th class="text-left" scope="row">
+                            <span class="text-muted">{{ preacher.pr_obj['anarana'] }}</span> {{ preacher.pr_obj['fanampinanarana'] }}
+                        </th>
+                        <td>{{ preacher.publication }}</td>
+                        <td>{{ preacher.video }}</td>
+                        <td>{{ preacher.hour }}</td>
+                        <td>{{ preacher.visit }}</td>
+                        <td>{{ preacher.study }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endmacro %}
 
-                <div class="collapse multi-collapse">
-                    <table class="table table-dark table-sm text-right">
-                        <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(not_returned) }}</span></caption>
-                        <thead>
-                            <tr>
-                                <th class="text-left" scope="col">Anarana</th>
-                                <th scope="col">ZVN</th>
-                                <th scope="col">VID</th>
-                                <th scope="col">ORA</th>
-                                <th scope="col">FTS</th>
-                                <th scope="col">FAP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for preacher in indiv_report %}
-                            <tr class="{% if preacher.hour == 0 %} text-muted{% endif %}">
-                                <th class="text-left" scope="row">
-                                    <span class="text-muted">{{ preacher.pr_obj['anarana'] }}</span> {{ preacher.pr_obj['fanampinanarana'] }}
-                                </th>
-                                <td>{{ preacher.publication }}</td>
-                                <td>{{ preacher.video }}</td>
-                                <td>{{ preacher.hour }}</td>
-                                <td>{{ preacher.visit }}</td>
-                                <td>{{ preacher.study }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="d-flex flex-column my-0 py-0">
-                    <div class="collapse show multi-collapse mx-auto my-0 py-0">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </div>
-                    <div class="collapse multi-collapse mx-auto my-0 py-0">
-                        <i class="material-icons">keyboard_arrow_up</i>
-                    </div>
-                </div>
-            </div>
-        </a>
+        {{ widget('main_board', content=content())|safe }}
 
         <div class="mt-3">
             <div id="no_report_carousel" class="carousel slide mt-3" data-ride="carousel">
@@ -68,7 +57,7 @@
 
                     {% for p in not_returned %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
-                        {% include "includes/pr_card.html" %}
+                        {{ widget('pr_card', id=p['id'])|safe }}
                     </div>
                     {% else %}
                     <div class="alert alert-success" role="alert">

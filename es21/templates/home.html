@@ -4,80 +4,70 @@
 {% block container %}
 <div class="row">
     <div class="col-lg-9">
-        <a class="text-decoration-none" data-toggle="collapse" href=".multi-collapse" aria-expanded="false">
-            <div class="jumbotron accordion bg-dark text-light p-3 p-sm-4 p-md-5 rounded">
-                <h1 class="display-4">{{ MONTH.prettie() }}</h1>
-                <div class="collapse show multi-collapse">
-                    <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
-                </div>
-                <hr class="my-1 my-sm-4 bg-light">
-                <p>Isan'ny mpitory <span class="badge bg-secondary">{{ len(preacher) }}</span></p>
+        {% macro content() %}
+        <div class="collapse show multi-collapse">
+            <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
+        </div>
+        <hr class="my-1 my-sm-4 bg-light">
+        <p>Isan'ny mpitory <span class="badge bg-secondary">{{ len(preacher) }}</span></p>
 
-                <div class="collapse multi-collapse">
-                    <table class="table table-dark text-right">
-                        <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(preacher) - post.tot['isa'] }}</span></caption>
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Isa</th>
-                                <th scope="col">ZVN</th>
-                                <th scope="col">VID</th>
-                                <th scope="col">ORA</th>
-                                <th scope="col">FTS</th>
-                                <th scope="col">FAP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="text-left" scope="row">Mpitory</th>
-                                <td>{{ post.non['isa'] }}</td>
-                                <td>{{ post.non['zvn'] }}</td>
-                                <td>{{ post.non['vid'] }}</td>
-                                <td>{{ post.non['ora'] }}</td>
-                                <td>{{ post.non['fit'] }}</td>
-                                <td>{{ post.non['fam'] }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-left" scope="row">Mpanampy</th>
-                                <td>{{ post.aux['isa'] }}</td>
-                                <td>{{ post.aux['zvn'] }}</td>
-                                <td>{{ post.aux['vid'] }}</td>
-                                <td>{{ post.aux['ora'] }}</td>
-                                <td>{{ post.aux['fit'] }}</td>
-                                <td>{{ post.aux['fam'] }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-left" scope="row">Maharitra</th>
-                                <td>{{ post.reg['isa'] }}</td>
-                                <td>{{ post.reg['zvn'] }}</td>
-                                <td>{{ post.reg['vid'] }}</td>
-                                <td>{{ post.reg['ora'] }}</td>
-                                <td>{{ post.reg['fit'] }}</td>
-                                <td>{{ post.reg['fam'] }}</td>
-                            </tr>
-                            <tr class="table-active">
-                                <th class="text-left" scope="row">Total</th>
-                                <td>{{ post.tot['isa'] }}</td>
-                                <td>{{ post.tot['zvn'] }}</td>
-                                <td>{{ post.tot['vid'] }}</td>
-                                <td>{{ post.tot['ora'] }}</td>
-                                <td>{{ post.tot['fit'] }}</td>
-                                <td>{{ post.tot['fam'] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="collapse multi-collapse">
+            <table class="table table-dark text-right">
+                <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(preacher) - post.tot['isa'] }}</span></caption>
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Isa</th>
+                        <th scope="col">ZVN</th>
+                        <th scope="col">VID</th>
+                        <th scope="col">ORA</th>
+                        <th scope="col">FTS</th>
+                        <th scope="col">FAP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="text-left" scope="row">Mpitory</th>
+                        <td>{{ post.non['isa'] }}</td>
+                        <td>{{ post.non['zvn'] }}</td>
+                        <td>{{ post.non['vid'] }}</td>
+                        <td>{{ post.non['ora'] }}</td>
+                        <td>{{ post.non['fit'] }}</td>
+                        <td>{{ post.non['fam'] }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Mpanampy</th>
+                        <td>{{ post.aux['isa'] }}</td>
+                        <td>{{ post.aux['zvn'] }}</td>
+                        <td>{{ post.aux['vid'] }}</td>
+                        <td>{{ post.aux['ora'] }}</td>
+                        <td>{{ post.aux['fit'] }}</td>
+                        <td>{{ post.aux['fam'] }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Maharitra</th>
+                        <td>{{ post.reg['isa'] }}</td>
+                        <td>{{ post.reg['zvn'] }}</td>
+                        <td>{{ post.reg['vid'] }}</td>
+                        <td>{{ post.reg['ora'] }}</td>
+                        <td>{{ post.reg['fit'] }}</td>
+                        <td>{{ post.reg['fam'] }}</td>
+                    </tr>
+                    <tr class="table-active">
+                        <th class="text-left" scope="row">Total</th>
+                        <td>{{ post.tot['isa'] }}</td>
+                        <td>{{ post.tot['zvn'] }}</td>
+                        <td>{{ post.tot['vid'] }}</td>
+                        <td>{{ post.tot['ora'] }}</td>
+                        <td>{{ post.tot['fit'] }}</td>
+                        <td>{{ post.tot['fam'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endmacro %}
 
-                <div class="d-flex flex-column my-0 py-0">
-                    <div class="collapse show multi-collapse mx-auto my-0 py-0">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </div>
-                    <div class="collapse multi-collapse mx-auto my-0 py-0">
-                        <i class="material-icons">keyboard_arrow_up</i>
-                    </div>
-                </div>
-            </div>
-        </a>
+        {{ widget('main_board', content=content())|safe }}
 
         <a class="btn btn-primary btn-block my-3 d-lg-none" href="{{ url('main.new') }}">Hampiditra mpitory vaovao</a>
 
@@ -94,7 +84,6 @@
                     {% for p in not_returned %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
                         {{ widget('pr_card', id=p['id'])|safe }}
-
                     </div>
                     {% else %}
                     <div class="alert alert-success" role="alert">
@@ -105,14 +94,14 @@
             </div>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-2">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mt-1">
                     <a class="btn btn-light btn-block shadow border py-2" href="{{ url('auxiliary.home') }}">
                         Mpisavalalana mpanampy
                     </a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 mt-1">
                     <a class="btn btn-light btn-block shadow border py-2 disabled" href="" title="Mbola eo ampanamboarana">
                         Mpisavalalana maharitra
                     </a>
