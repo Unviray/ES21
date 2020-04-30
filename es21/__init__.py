@@ -39,10 +39,12 @@ def create_app(test_config=None):
 
         return dict(
             len=len,
+            str=str,
             round=round,
             url=url,
             app=app,
-            pr_card=get_pr_card, )
+            pr_card=get_pr_card,
+            MONTH=app.config['MONTH'], )
 
     @app.context_processor
     def color_processor():

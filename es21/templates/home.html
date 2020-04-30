@@ -6,7 +6,7 @@
     <div class="col-lg-9">
         <a class="text-decoration-none" data-toggle="collapse" href=".multi-collapse" aria-expanded="false">
             <div class="jumbotron accordion bg-dark text-light p-3 p-sm-4 p-md-5 rounded">
-                <h1 class="display-4">{{ app.config['MONTH'].prettie() }}</h1>
+                <h1 class="display-4">{{ MONTH.prettie() }}</h1>
                 <div class="collapse show multi-collapse">
                     <p class="lead d-none d-sm-inline">Fandrindrana sy fampidirana tatitrin'ny mpitory</p>
                 </div>
@@ -14,8 +14,8 @@
                 <p>Isan'ny mpitory <span class="badge bg-secondary">{{ len(preacher) }}</span></p>
 
                 <div class="collapse multi-collapse">
-                    <table class="table table-dark -right">
-                        <caption>Tsy namerina tatitra: {{ len(preacher) - post.tot['isa'] }}</caption>
+                    <table class="table table-dark text-right">
+                        <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(preacher) - post.tot['isa'] }}</span></caption>
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -66,7 +66,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
 
                 <div class="d-flex flex-column my-0 py-0">

@@ -24,6 +24,6 @@ def entry():
 
     ids = mdb.get(q.volana == MONTH)['mpitory']
 
-    preacher = db.search(q.id.one_of(ids))
+    preachers = db.search(q.id.one_of(ids))
 
-    return dict(preacher=preacher)
+    return dict(preachers=preachers)
