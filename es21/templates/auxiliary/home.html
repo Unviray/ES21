@@ -56,6 +56,31 @@
             </div>
         </a>
 
+        <div class="mt-3">
+            <div id="no_report_carousel" class="carousel slide mt-3" data-ride="carousel">
+                <div class="carousel-inner">
+                    <a class="text-reset" href="{{ url('main.search', filter='not_returned is_auxiliary') }}">
+                        <h4 class="h4">
+                            Mbola tsy namerina Tatitra
+                            <span class="badge bg-{% if len(not_returned) == 0 %}success{% else %}danger{% endif %}">{{ len(not_returned) }}</span>
+                        </h4>
+                    </a>
+
+                    {% for p in not_returned %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        {% include "includes/pr_card.html" %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success" role="alert">
+                        Namerina tatitra daholo izy rehetra
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-9">
     </div>
 </div>
 {% endblock container %}

@@ -7,6 +7,13 @@ Include all filters of preachers.
 
 from flask import current_app as app
 
+from tinydb import Query
+
+from .database import get_db
+
+
+q = Query()
+
 
 class Filter(object):
     def __init__(self, preachers):
@@ -16,6 +23,7 @@ class Filter(object):
 
         self.register_filter(returned)
         self.register_filter(not_returned)
+        self.register_filter(is_auxiliary)
 
     def __call__(self, filter_name, *args, **kwargs):
         """
@@ -76,3 +84,18 @@ def not_returned(month=None):
             return True
 
     return func
+
+
+def is_auxiliary(month=None):
+    """
+    Check if preacher is auxiliary pionner
+    :return: a function for filter()
+    """
+
+    mdb = get_db('mpanampy')
+
+    # TODO: change this to a decorator 'with_month'
+    month = month or str(app.config['MONTH'])
+    ids = mdb.get(q.volana == month)['mpitory']
+
+    return lambda preacher: preacher['id'] in ids

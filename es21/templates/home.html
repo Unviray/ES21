@@ -87,13 +87,17 @@
                     <a class="text-reset" href="{{ url('main.search', filter='not_returned') }}">
                         <h4 class="h4">
                             Mbola tsy namerina Tatitra
-                            <span class="badge rounded-pill bg-danger">{{ len(not_returned) }}</span>
+                            <span class="badge bg-{% if len(not_returned) == 0 %}success{% else %}danger{% endif %}">{{ len(not_returned) }}</span>
                         </h4>
                     </a>
 
                     {% for p in not_returned %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
                         {% include "includes/pr_card.html" %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success" role="alert">
+                        Namerina tatitra daholo izy rehetra
                     </div>
                     {% endfor %}
                 </div>
@@ -105,6 +109,11 @@
                 <div class="col-md-6">
                     <a class="btn btn-light btn-block shadow border py-2" href="{{ url('auxiliary.home') }}">
                         Mpisavalalana mpanampy
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="btn btn-light btn-block shadow border py-2 disabled" href="" title="Mbola eo ampanamboarana">
+                        Mpisavalalana maharitra
                     </a>
                 </div>
             </div>
