@@ -97,20 +97,3 @@ def entry():
         hide_search=True,
         is_active=is_active,
         preacher=ft.preachers, )
-
-
-@templated('includes/pr_card.html')
-def get_pr_card(id):
-    """
-    Not a view but a small function to return pr_card.
-    """
-
-    db = get_db()
-    q = Query()
-
-    p = db.get(q.id == id)
-
-    if p is None:
-        return None
-
-    return dict(p=p)

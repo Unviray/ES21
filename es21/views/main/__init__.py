@@ -55,9 +55,3 @@ blueprint.add_url_rule(
     'delete',
     delete.entry,
     methods=['POST'])
-
-
-blueprint.add_url_rule(
-    '/preacher/<int:id>',
-    'pr_card',
-    search.get_pr_card, )

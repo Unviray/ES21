@@ -8,6 +8,7 @@ Root of entire project include app factory (create_app).
 import logging
 from logging.handlers import RotatingFileHandler
 
+from werkzeug.utils import import_string
 from flask import (
     Flask,
     url_for as url, )
@@ -15,7 +16,11 @@ from flask import (
 from . import tfilter
 from . import config, database
 
-from .views import main, auxiliary, error
+from .views import (
+    main,
+    auxiliary,
+    error,
+    widgets, )
 
 
 def create_app(test_config=None):
@@ -35,7 +40,10 @@ def create_app(test_config=None):
 
     @app.context_processor
     def processor():
-        from .views.main.search import get_pr_card
+        def get_widget(name, *args, **kwargs):
+            module_widget = import_string(f'es21.views.widgets.{name}:entry')
+
+            return module_widget(*args, **kwargs)
 
         return dict(
             len=len,
@@ -43,7 +51,7 @@ def create_app(test_config=None):
             round=round,
             url=url,
             app=app,
-            pr_card=get_pr_card,
+            widget=get_widget,
             MONTH=app.config['MONTH'], )
 
     @app.context_processor
@@ -80,6 +88,7 @@ def load_views(app):
     app.add_url_rule('/', endpoint='home')
 
     app.register_blueprint(auxiliary.blueprint)
+    app.register_blueprint(widgets.blueprint)
 
 
 def load_template_filter(app):

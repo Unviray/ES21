@@ -37,7 +37,7 @@
     <div class="row">
         {% for p in preacher %}
         <div class="col-md-6 mb-3">
-            {% include "includes/pr_card.html" %}
+            {{ widget('pr_card', id=p['id'])|safe }}
         </div>
         {% endfor %}
     </div>
