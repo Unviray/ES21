@@ -1,12 +1,12 @@
-<canvas class="hourChart d-none d-md-block" width="600" height="200"></canvas>
-<canvas class="hourChart d-md-none" width="600" height="300"></canvas>
+<canvas class="lineChart d-none d-md-block" width="600" height="200"></canvas>
+<canvas class="lineChart d-md-none" width="600" height="300"></canvas>
 
 
 {% block script %}
 <script>
     var chartData = {{ chart_data.data.decode()|safe }}
 
-    const hour_chart = document.getElementsByClassName("hourChart");
+    const hour_chart = document.getElementsByClassName("lineChart");
 
     for (i = 0; i < hour_chart.length; i++) {
         var myChart = new Chart(hour_chart[i].getContext('2d'), {

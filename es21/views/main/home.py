@@ -97,14 +97,26 @@ def post_report(preachers):
 
 def hour_chart(preachers):
     service_year = get_service_year()
-    result = []
+    ChartData = namedtuple('ChartData', ['legend', 'label', 'data'])
+
+    label = []
+    data = []
+
+    def get_hour(pr, month):
+        return pr['tatitra'][str(month)]['ora']
 
     for month in service_year:
-        fr = Filter(preachers)
-        fr('returned', month=str(month))
+        f = Filter(preachers)
+        f('returned', month=str(month))
 
-        s_hour = sum([pr['tatitra'][str(month)]['ora'] for pr in fr.preachers])
+        hour = sum([get_hour(pr, month) for pr in f.preachers])
 
-        result.append((month.prettie('{short_month} {short_year}'), s_hour))
+        f_aux = Filter(f.preachers)
+        f_aux('is_auxiliary', month=str(month))
 
-    return result
+        aux_hour = sum([get_hour(pr, month) for pr in f_aux.preachers])
+
+        label.append(month.prettie('{short_month} {short_year}'))
+        data.append((hour, aux_hour))
+
+    return ChartData(['Mpitory rehetra', 'Mpanampy'], label, data)
