@@ -29,7 +29,7 @@
                     {% for preacher in indiv_report %}
                     <tr class="{% if preacher.hour == 0 %} text-muted{% endif %}">
                         <th class="text-left" scope="row">
-                            <span class="text-muted">{{ preacher.pr_obj['anarana'] }}</span> {{ preacher.pr_obj['fanampinanarana'] }}
+                            {{ preacher.pr_obj['anarana'] }} {{ preacher.pr_obj['fanampinanarana'] }}
                         </th>
                         <td>{{ preacher.publication }}</td>
                         <td>{{ preacher.video }}</td>

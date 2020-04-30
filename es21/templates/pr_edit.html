@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">Mombamomba</h5>
 
-                    <div class="mb-3" id="last_name">
+                    <div class="mb-3" id="last_name_field">
                         {{ form.last_name.label }}
                         {% if form.last_name.errors %}
                         {{ form.last_name(class="form-control is-invalid") }}
@@ -22,7 +22,7 @@
                         <div class="is-invalid text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="mb-3" id="first_name">
+                    <div class="mb-3" id="first_name_field">
                         {{ form.first_name.label }}
                         {% if form.first_name.errors %}
                         {{ form.first_name(class="form-control is-invalid") }}
@@ -35,7 +35,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="mb-3" id="gender">
+                            <div class="mb-3" id="gender_field">
                                 {{ form.gender.label }}
                                 {% if form.gender.errors %}
                                 {{ form.gender(class="form-control is-invalid") }}
@@ -48,13 +48,18 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="mb-3" id="id">
+                            <div class="mb-3" id="id_field">
                                 {{ form.id.label }}
-                                {% if form.id.errors %}
-                                {{ form.id(class="form-control is-invalid") }}
-                                {% else %}
-                                {{ form.id(class="form-control") }}
-                                {% endif %}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">nº</span>
+                                    </div>
+                                    {% if form.id.errors %}
+                                    {{ form.id(class="form-control is-invalid") }}
+                                    {% else %}
+                                    {{ form.id(class="form-control") }}
+                                    {% endif %}
+                                </div>
                                 {% for error in form.id.errors %}
                                 <div class="is-invalid text-danger">{{ error }}</div>
                                 {% endfor %}
@@ -67,7 +72,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">Daty</h5>
 
-                    <div class="mb-3" id="birth">
+                    <div class="mb-3" id="birth_field">
                         {{ form.birth.label }}
                         {% if form.birth.errors %}
                         {{ form.birth(class="form-control is-invalid") }}
@@ -78,7 +83,7 @@
                         <div class="is-invalid text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="mb-3" id="baptism">
+                    <div class="mb-3" id="baptism_field">
                         {{ form.baptism.label }}
                         {% if form.baptism.errors %}
                         {{ form.baptism(class="form-control is-invalid") }}
@@ -97,7 +102,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">Fifandraisana</h5>
 
-                    <div class="mb-3" id="phone1">
+                    <div class="mb-3" id="phone1_field">
                         {{ form.phone1.label }}
                         {% if form.phone1.errors %}
                         {{ form.phone1(class="form-control is-invalid") }}
@@ -108,7 +113,7 @@
                         <div class="is-invalid text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="mb-3" id="phone2">
+                    <div class="mb-3" id="phone2_field">
                         {{ form.phone2.label }}
                         {% if form.phone2.errors %}
                         {{ form.phone2(class="form-control is-invalid") }}
@@ -119,7 +124,7 @@
                         <div class="is-invalid text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="mb-3" id="phone3">
+                    <div class="mb-3" id="phone3_field">
                         {{ form.phone3.label }}
                         {% if form.phone3.errors %}
                         {{ form.phone3(class="form-control is-invalid") }}
@@ -130,7 +135,7 @@
                         <div class="is-invalid text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="mb-3" id="address">
+                    <div class="mb-3" id="address_field">
                         {{ form.address.label }}
                         {% if form.address.errors %}
                         {{ form.address(class="form-control is-invalid") }}
@@ -149,7 +154,7 @@
 
                     <div class="row">
                         <div class="col-5">
-                            <div class="mb-3" id="promo">
+                            <div class="mb-3" id="promo_field">
                                 {{ form.promo.label }}
                                 {% if form.promo.errors %}
                                 {{ form.promo(class="form-control is-invalid") }}
@@ -162,7 +167,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <div class="mb-3" id="group">
+                            <div class="mb-3" id="group_field">
                                 {{ form.group.label }}
                                 {% if form.group.errors %}
                                 {{ form.group(class="form-control is-invalid") }}
@@ -175,7 +180,7 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <div class="mb-3 d-flex flex-column" id="permanent_pionner">
+                            <div class="mb-3 d-flex flex-column" id="permanent_pionner_field">
                                 {{ form.permanent_pionner.label(class="form-check-label mb-3") }}
                                 {% if form.permanent_pionner.errors %}
                                 {{ form.permanent_pionner(class="form-control mx-auto is-invalid") }}
@@ -196,3 +201,17 @@
     <button class="btn btn-primary" type="submit">Hampidirina</button>
 </form>
 {% endblock %}
+
+
+{% block script %}
+<script>
+    let cleave = []
+    for (i = 1; i <= 3; i++) {
+        cleave.push(
+            new Cleave('#phone' + i, {
+                phone: true,
+                phoneRegionCode: 'MG'
+            }));
+    }
+</script>
+{% endblock script %}
