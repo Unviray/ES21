@@ -17,9 +17,7 @@
 
                 <div class="collapse multi-collapse">
                     <table class="table table-dark table-sm text-right">
-                        {#
-                        <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(preachers) }}</span></caption>
-                        #}
+                        <caption>Tsy namerina tatitra <span class="badge bg-secondary">{{ len(not_returned) }}</span></caption>
                         <thead>
                             <tr>
                                 <th class="text-left" scope="col">Anarana</th>
@@ -31,16 +29,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for preacher in preachers %}
-                            <tr>
+                            {% for preacher in indiv_report %}
+                            <tr class="{% if preacher.hour == 0 %} text-muted{% endif %}">
                                 <th class="text-left" scope="row">
-                                    <span class="text-muted">{{ preacher['anarana'] }}</span> {{ preacher['fanampinanarana'] }}
+                                    <span class="text-muted">{{ preacher.pr_obj['anarana'] }}</span> {{ preacher.pr_obj['fanampinanarana'] }}
                                 </th>
-                                <td>{{ preacher['tatitra'][str(MONTH)]['zavatra_napetraka'] }}</td>
-                                <td>{{ preacher['tatitra'][str(MONTH)]['video'] }}</td>
-                                <td>{{ preacher['tatitra'][str(MONTH)]['ora'] }}</td>
-                                <td>{{ preacher['tatitra'][str(MONTH)]['fitsidihana'] }}</td>
-                                <td>{{ preacher['tatitra'][str(MONTH)]['fampianarana'] }}</td>
+                                <td>{{ preacher.publication }}</td>
+                                <td>{{ preacher.video }}</td>
+                                <td>{{ preacher.hour }}</td>
+                                <td>{{ preacher.visit }}</td>
+                                <td>{{ preacher.study }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
