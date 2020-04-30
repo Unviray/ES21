@@ -11,7 +11,7 @@ from flask import current_app as app
 
 from tinydb import Query
 
-from ...utils import templated, navbar_form
+from ...utils import templated, navbar_form, get_service_year
 from ...database import get_db
 from ...filters import Filter, returned
 
@@ -37,6 +37,7 @@ def entry():
     return dict(
         preachers=preachers,
         not_returned=not_returned,
+        hour_chart=hour_chart(db.all()),
         indiv_report=indiv_report(preachers), )
 
 
@@ -65,5 +66,21 @@ def indiv_report(preachers):
                 hour=0,
                 visit=0,
                 study=0, ))
+
+    return result
+
+
+def hour_chart(preachers):
+    service_year = get_service_year()
+    result = []
+
+    for month in service_year:
+        fr = Filter(preachers)
+        fr('is_auxiliary', month=str(month))
+        fr('returned', month=str(month))
+
+        s_hour = sum([pr['tatitra'][str(month)]['ora'] for pr in fr.preachers])
+
+        result.append((month.prettie('{short_month} {short_year}'), s_hour))
 
     return result

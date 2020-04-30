@@ -94,6 +94,9 @@ class MonthBase(object):
             year=y
         )
 
+    def __repr__(self):
+        return f'<MonthBase month: {str(self)}>'
+
     def __sub__(self, n):
         """
         Use to jump {n} month behind
