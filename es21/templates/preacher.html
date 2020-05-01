@@ -197,12 +197,29 @@
             <form method="post" novalidate>
                 <div class="modal-body bg-light">
                     {{ form.csrf_token }}
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <ul class="mb-0">
+                            {% for error in form.errors %}
+                            {% for e in form.errors[error] %}
+                            <li>
+                                {{ e }}
+                            </li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
                     <div class="mb-3 row">
                         <div class="col-9">
                             {{ form.publication.label }}
                         </div>
                         <div class="col-3">
+                           {% if form.publication.errors %}
+                           {{ form.publication(class="form-control is-invalid") }}
+                           {% else %}
                            {{ form.publication(class="form-control") }}
+                           {% endif %}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -210,7 +227,11 @@
                             {{ form.video.label }}
                         </div>
                         <div class="col-3">
+                            {% if form.video.errors %}
+                            {{ form.video(class="form-control is-invalid") }}
+                            {% else %}
                             {{ form.video(class="form-control") }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -218,7 +239,11 @@
                             {{ form.hour.label }}
                         </div>
                         <div class="col-3">
-                          {{ form.hour(class="form-control") }}
+                            {% if form.hour.errors %}
+                            {{ form.hour(class="form-control is-invalid") }}
+                            {% else %}
+                            {{ form.hour(class="form-control") }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -226,7 +251,11 @@
                             {{ form.visit.label }}
                         </div>
                         <div class="col-3">
-                         {{ form.visit(class="form-control") }}
+                            {% if form.visit.errors %}
+                            {{ form.visit(class="form-control is-invalid") }}
+                            {% else %}
+                            {{ form.visit(class="form-control") }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -234,19 +263,31 @@
                             {{ form.study.label }}
                         </div>
                         <div class="col-3">
-                         {{ form.study(class="form-control") }}
+                            {% if form.study.errors %}
+                            {{ form.study(class="form-control is-invalid") }}
+                            {% else %}
+                            {{ form.study(class="form-control") }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mb-3">
                         {{ form.remark.label }}
+                        {% if form.remark.errors %}
+                        {{ form.remark(class="form-control is-invalid") }}
+                        {% else %}
                         {{ form.remark(class="form-control") }}
+                        {% endif %}
                     </div>
                     <div class="mb-3 row">
                         <div class="col-6 col-md-7">
                             {{ form.pionner.label }}
                         </div>
                         <div class="col-6 col-md-5">
+                            {% if form.pionner.errors %}
+                            {{ form.pionner(class="form-control is-invalid") }}
+                            {% else %}
                             {{ form.pionner(class="form-control") }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -329,4 +370,29 @@
 </div>
 
 {% include "includes/footer.html" %}
+{% endblock %}
+
+
+{% block script %}
+
+{% if form.errors %}
+<script>
+    const reportModal= new bootstrap.Modal(document.getElementById('reportModal'));
+    reportModal.show();
+</script>
+{% endif %}
+
+<script>
+    const int_list = ['#publication', '#video', '#hour', '#visit', '#study']
+
+    let cleave = []
+    for (i = 0; i < int_list.length; i++) {
+        cleave.push(
+            new Cleave(int_list[i], {
+                numeral: true,
+                numeralPositiveOnly: true
+            })
+        );
+    }
+</script>
 {% endblock %}

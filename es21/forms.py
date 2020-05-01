@@ -70,6 +70,10 @@ class ReportForm(FlaskForm):
         ('Aux', 'Mpanampy'),
         ('Reg', 'Maharitra'), ], )
 
+    def validate_hour(self, field):
+        if field.data < 1:
+            raise ValidationError("Tokony hiotran'ny 0 ny Ora")
+
 
 class PreacherForm(FlaskForm):
     id = IntegerField('Nomerao', **int_kwargs)

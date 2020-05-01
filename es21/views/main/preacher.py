@@ -136,7 +136,7 @@ class ReportHandler(object):
         if not self.has_report:
             pionner = self.init_pionner()
             if pionner:
-                self.form = self.form_class(pionner)
+                self.form = self.form_class(pionner=pionner)
             else:
                 self.form = self.form_class()
 
