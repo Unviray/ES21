@@ -8,12 +8,9 @@ Root of entire project include app factory (create_app).
 import logging
 from logging.handlers import RotatingFileHandler
 
-from werkzeug.utils import import_string
-from flask import (
-    Flask,
-    url_for as url, )
-
+from flask import Flask
 from . import tfilter
+from . import ctx_processor
 from . import config, database
 
 from .views import (
@@ -35,50 +32,9 @@ def create_app(test_config=None):
 
     load_views(app)
     load_template_filter(app)
+    load_context_processor(app)
     load_error_handler(app)
     load_error_logger(app)
-
-    @app.context_processor
-    def processor():
-        def get_widget(name, *args, **kwargs):
-            module_widget = import_string(f'es21.views.widgets.{name}:entry')
-
-            return module_widget(*args, **kwargs)
-
-        return dict(
-            len=len,
-            str=str,
-            round=round,
-            url=url,
-            app=app,
-            widget=get_widget,
-            MONTH=app.config['MONTH'], )
-
-    @app.context_processor
-    def color_processor():
-        def color_returned(preacher):
-            try:
-                hour = preacher['tatitra'][str(app.config['MONTH'])]['ora']
-            except KeyError:
-                return 'danger'
-            else:
-                return 'danger' if hour == 0 else 'primary'
-
-        def color_contrast(c):
-            return {
-                'dark': 'white',
-                'danger': 'white',
-                'primary': 'white',
-                'secondary': 'white',
-                'light': 'dark',
-                'success': 'white',
-                'info': 'dark',
-                'warning': 'dark',
-            }.get(c, 'dark')
-
-        return dict(
-            color_returned=color_returned,
-            color_contrast=color_contrast, )
 
     return app
 
@@ -95,6 +51,11 @@ def load_template_filter(app):
     app.add_template_filter(tfilter.month_name)
     app.add_template_filter(tfilter.pionner_name)
     app.add_template_filter(tfilter.date)
+
+
+def load_context_processor(app):
+    app.context_processor(ctx_processor.processor)
+    app.context_processor(ctx_processor.color_processor)
 
 
 def load_error_handler(app):
