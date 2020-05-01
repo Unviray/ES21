@@ -63,7 +63,7 @@ class NewPreacherHandler(object):
             'batisa': self.form.baptism.data,
             'groupe': self.form.group.data,
             'tombotsoa': self.form.promo.data,
-            'maharitra': self.form.permanent_pionner.data,
+            'maharitra': self.form.regular_pionner.data,
             'tatitra': {}, }
 
         self.db.insert(data)

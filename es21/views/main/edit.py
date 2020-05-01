@@ -39,7 +39,7 @@ def entry(id):
         baptism=preacher['batisa'],
         group=preacher['groupe'],
         promo=preacher['tombotsoa'],
-        permanent_pionner=preacher['maharitra'])
+        regular_pionner=preacher['maharitra'])
 
     if form.validate_on_submit():
         data = {
@@ -56,7 +56,7 @@ def entry(id):
             'batisa': form.baptism.data,
             'groupe': form.group.data,
             'tombotsoa': form.promo.data,
-            'maharitra': form.permanent_pionner.data,
+            'maharitra': form.regular_pionner.data,
             'tatitra': preacher['tatitra'], }
 
         db.update(data, q.id == id)

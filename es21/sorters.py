@@ -27,7 +27,7 @@ def tri_pionner(preachers, month=None):
 
     non = []  # basic preachers
     aux = []  # auxiliar pionner
-    reg = []  # permanent pionner
+    reg = []  # regular pionner
 
     for preacher in preachers:
         if preacher['id'] in aux_list:

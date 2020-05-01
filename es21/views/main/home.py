@@ -116,7 +116,15 @@ def hour_chart(preachers):
 
         aux_hour = sum([get_hour(pr, month) for pr in f_aux.preachers])
 
-        label.append(month.prettie('{short_month} {short_year}'))
-        data.append((hour, aux_hour))
+        f_reg = Filter(f.preachers)
+        f_reg('is_regular')
 
-    return ChartData(['Mpitory rehetra', 'Mpanampy'], label, data)
+        reg_hour = sum([get_hour(pr, month) for pr in f_reg.preachers])
+
+        label.append(month.prettie('{short_month} {short_year}'))
+        data.append((hour, reg_hour, aux_hour))
+
+    return ChartData(
+        legend=['Mpitory rehetra', 'Maharitra', 'Mpanampy'],
+        label=label,
+        data=data, )

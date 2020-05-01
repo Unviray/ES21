@@ -17,7 +17,6 @@ def entry(data):
         datasets.append({
             'label': data.legend[i],
             **default_line,
-            'backgroundColor': color(i, 0.4),
             'borderColor': color(i, 1),
             'pointBorderColor': color(i, 1),
             'pointHoverBackgroundColor': color(i, 1),
@@ -32,7 +31,7 @@ def entry(data):
 
 
 default_line = {
-    'fill': True,
+    'fill': False,
     'lineTension': 0.2,
     'borderCapStyle': 'butt',
     'borderDash': [],
@@ -49,9 +48,13 @@ default_line = {
 
 def color(index, alpha):
     cl = [
-        '75,192,192',
-        '192,75,192',
-        '192,192,75',
+        '0,0,230',
+        '0,200,200',
+        '0,200,0',
+
+        '192,75,75',
+        '75,192,75',
+        '75,75,192',
     ]
 
     return f'rgba({cl[index]},{alpha})'

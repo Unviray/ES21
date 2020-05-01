@@ -81,9 +81,11 @@ pionner_short2long = {
 filter_name = {
     'returned': 'namerina',
     'not_returned': 'tsy namerina',
+    'is_regular': 'mpisavalalana maharitra',
     'is_auxiliary': 'mpisavalalana mpanampy', }
 
 reverse_filter_name = {
     'namerina': 'returned',
     'tsy namerina': 'not_returned',
-    'mpisavalalana mpanampy': 'is_auxiliary'}
+    'mpisavalalana maharitra': 'is_regular',
+    'mpisavalalana mpanampy': 'is_auxiliary', }

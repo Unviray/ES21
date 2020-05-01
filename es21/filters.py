@@ -24,6 +24,7 @@ class Filter(object):
         self.register_filter(returned)
         self.register_filter(not_returned)
         self.register_filter(is_auxiliary)
+        self.register_filter(is_regular)
 
     def __call__(self, filter_name, *args, **kwargs):
         """
@@ -99,3 +100,12 @@ def is_auxiliary(month=None):
     ids = mdb.get(q.volana == month)['mpitory']
 
     return lambda preacher: preacher['id'] in ids
+
+
+def is_regular():
+    """
+    Check if preacher is regular pionner
+    :return: a function for filter()
+    """
+
+    return lambda preacher: preacher['maharitra']

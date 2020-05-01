@@ -2,17 +2,16 @@
 <canvas class="lineChart d-md-none" width="600" height="300"></canvas>
 
 
-{% block script %}
 <script>
     var chartData = {{ chart_data.data.decode()|safe }}
 
     const hour_chart = document.getElementsByClassName("lineChart");
-
-    for (i = 0; i < hour_chart.length; i++) {
-        var myChart = new Chart(hour_chart[i].getContext('2d'), {
-            type: 'line',
-            data: chartData,
-        });
+    window.onload = function() {
+        for (i = 0; i < hour_chart.length; i++) {
+            var myChart = new Chart(hour_chart[i].getContext('2d'), {
+                type: 'line',
+                data: chartData,
+            });
+        }
     }
 </script>
-{% endblock %}

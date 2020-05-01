@@ -180,14 +180,14 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <div class="mb-3 d-flex flex-column" id="permanent_pionner_field">
-                                {{ form.permanent_pionner.label(class="form-check-label mb-3") }}
-                                {% if form.permanent_pionner.errors %}
-                                {{ form.permanent_pionner(class="form-control mx-auto is-invalid") }}
+                            <div class="mb-3 d-flex flex-column" id="regular_pionner_field">
+                                {{ form.regular_pionner.label(class="form-check-label mb-3") }}
+                                {% if form.regular_pionner.errors %}
+                                {{ form.regular_pionner(class="form-control mx-auto is-invalid") }}
                                 {% else %}
-                                {{ form.permanent_pionner(class="form-check-input mx-auto") }}
+                                {{ form.regular_pionner(class="form-check-input mx-auto") }}
                                 {% endif %}
-                                {% for error in form.permanent_pionner.errors %}
+                                {% for error in form.regular_pionner.errors %}
                                 <div class="is-invalid text-danger">{{ error }}</div>
                                 {% endfor %}
                             </div>

@@ -7,8 +7,6 @@ Include all form used in es21.
 
 import re
 
-from flask import current_app as app
-
 from flask_wtf import FlaskForm
 from wtforms.widgets.core import Input
 from wtforms.validators import (
@@ -100,7 +98,7 @@ class PreacherForm(FlaskForm):
         ("Mpanampy amin'ny fanompoana", "Mpanampy amin'ny fanompoana"),
         ("Anti-panahy", "Anti-panahy")
     ])
-    permanent_pionner = BooleanField('Mpisavalalana maharitra', default=False)
+    regular_pionner = BooleanField('Mpisavalalana maharitra', default=False)
 
     def validate_id(self, field):
         from .database import get_db
