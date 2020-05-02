@@ -107,7 +107,7 @@ def post_report(preachers):
 
 def hour_chart(preachers):
     service_year = get_service_year()
-    ChartData = namedtuple('ChartData', ['legend', 'label', 'data'])
+    ChartData = namedtuple('ChartData', ['legend', 'id', 'label', 'data'])
 
     label = []
     data = []
@@ -136,6 +136,7 @@ def hour_chart(preachers):
 
     return ChartData(
         legend=['Mpitory rehetra', 'Maharitra', 'Mpanampy'],
+        id=['all', 'reg', 'aux'],
         label=label,
         data=data, )
 

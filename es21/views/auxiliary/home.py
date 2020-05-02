@@ -82,7 +82,7 @@ def indiv_report(preachers):
 
 def hour_chart(preachers):
     service_year = get_service_year()
-    ChartData = namedtuple('ChartData', ['legend', 'label', 'data'])
+    ChartData = namedtuple('ChartData', ['legend', 'id', 'label', 'data'])
 
     label = []
     data = []
@@ -97,7 +97,7 @@ def hour_chart(preachers):
         label.append(month.prettie('{short_month} {short_year}'))
         data.append((s_hour,))
 
-    return ChartData(['Ora'], label, data)
+    return ChartData(['Ora'], ['aux'], label, data)
 
 
 def growth_data(id, name, preachers):

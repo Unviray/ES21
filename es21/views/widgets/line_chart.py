@@ -8,6 +8,7 @@ Display line chart.
 from flask import jsonify
 
 from ...utils import templated
+from ...const import color_chart
 
 
 @templated('widgets/line_chart.html')
@@ -26,9 +27,9 @@ def entry(data):
         datasets.append({
             'label': data.legend[i],
             **default_line,
-            'borderColor': color(i, 1),
-            'pointBorderColor': color(i, 1),
-            'pointHoverBackgroundColor': color(i, 1),
+            'borderColor': color(data.id[i], 1),
+            'pointBorderColor': color(data.id[i], 1),
+            'pointHoverBackgroundColor': color(data.id[i], 1),
             'pointHoverBorderColor': "rgba(220,220,220,1)",
             'data': [_[i] for _ in data.data], })
 
@@ -56,14 +57,8 @@ default_line = {
 
 
 def color(index, alpha):
-    cl = [
-        '40,40,230',
-        '0,200,200',
-        '0,200,0',
+    r = color_chart[index][0]
+    g = color_chart[index][1]
+    b = color_chart[index][2]
 
-        '192,75,75',
-        '75,192,75',
-        '75,75,192',
-    ]
-
-    return f'rgba({cl[index]},{alpha})'
+    return f'rgba({r},{g},{b},{alpha})'

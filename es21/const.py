@@ -27,7 +27,6 @@ month_name = {
     'november': 'novambra',
     'december': 'desambra', }
 
-
 month_short2long = {
     'jan': 'janoary',
     'feb': 'febroary',
@@ -42,7 +41,6 @@ month_short2long = {
     'nov': 'novambra',
     'dec': 'desambra', }
 
-
 month_long2short = {
     'january': 'jan',
     'february': 'feb',
@@ -56,7 +54,6 @@ month_long2short = {
     'october': 'okt',
     'november': 'nov',
     'december': 'des', }
-
 
 month_list = (
     'janoary',
@@ -89,3 +86,10 @@ reverse_filter_name = {
     'tsy namerina': 'not_returned',
     'mpisavalalana maharitra': 'is_regular',
     'mpisavalalana mpanampy': 'is_auxiliary', }
+
+
+color_chart = {
+    'all': [13, 110, 253],
+    'aux': [23, 162, 184],
+    'reg': [255, 193, 0],
+}
