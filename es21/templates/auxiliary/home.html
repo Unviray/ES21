@@ -74,7 +74,8 @@
 
     </div>
     <div class="col-lg-3 d-none d-lg-block">
-        {{ widget('growth', title='Fitombona', data=growth)|safe }}
+        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny volana teo aloha", data=growth)|safe }}
+        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
     </div>
 </div>
 {% endblock container %}

@@ -42,9 +42,17 @@ def entry():
         growth_data('fitsidihana', 'Fitsidihana', preachers),
         growth_data('fampianarana', 'Fampianarana', preachers),
     ]
+    growth_six = [
+        growth_data_six('zavatra_napetraka', 'Zavatra napetraka', preachers),
+        growth_data_six('video', 'Video', preachers),
+        growth_data_six('ora', 'Ora', preachers),
+        growth_data_six('fitsidihana', 'Fitsidihana', preachers),
+        growth_data_six('fampianarana', 'Fampianarana', preachers),
+    ]
 
     return dict(
         growth=growth,
+        growth_six=growth_six,
         preachers=preachers,
         not_returned=not_returned,
         hour_chart=hour_chart(db.all()),
@@ -118,5 +126,62 @@ def growth_data(id, name, preachers):
 
     now_data = sum([get_data(pr, month) for pr in f.preachers])
     last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
+
+    return GrowthData(name, last_data, now_data)
+
+
+def growth_data_six(id, name, preachers):
+    GrowthData = namedtuple('GrowthData', ['desc', 'last', 'now'])
+
+    MONTH = app.config['MONTH']
+
+    month = str(MONTH)
+    last_month_1 = MONTH.new_me() - 1
+    last_month_2 = MONTH.new_me() - 2
+    last_month_3 = MONTH.new_me() - 3
+    last_month_4 = MONTH.new_me() - 4
+    last_month_5 = MONTH.new_me() - 5
+    last_month_6 = MONTH.new_me() - 6
+
+    def get_data(pr, month):
+        return pr['tatitra'][str(month)][id]
+
+    f = Filter(preachers)
+    f('returned', month=str(month))
+
+    last_f1 = Filter(preachers)
+    last_f1('returned', month=str(last_month_1))
+
+    last_f2 = Filter(preachers)
+    last_f2('returned', month=str(last_month_2))
+
+    last_f3 = Filter(preachers)
+    last_f3('returned', month=str(last_month_3))
+
+    last_f4 = Filter(preachers)
+    last_f4('returned', month=str(last_month_4))
+
+    last_f5 = Filter(preachers)
+    last_f5('returned', month=str(last_month_5))
+
+    last_f6 = Filter(preachers)
+    last_f6('returned', month=str(last_month_6))
+
+    now_data = sum([get_data(pr, month) for pr in f.preachers])
+    last_data_1 = sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
+    last_data_2 = sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
+    last_data_3 = sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
+    last_data_4 = sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
+    last_data_5 = sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
+    last_data_6 = sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
+
+    last_data = sum([
+        last_data_1,
+        last_data_2,
+        last_data_3,
+        last_data_4,
+        last_data_5,
+        last_data_6,
+    ]) / 6
 
     return GrowthData(name, last_data, now_data)

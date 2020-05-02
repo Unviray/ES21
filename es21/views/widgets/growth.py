@@ -10,7 +10,7 @@ from ...utils import templated
 
 
 @templated('widgets/growth.html')
-def entry(title, data):
+def entry(data, **kwargs):
 
     GData = namedtuple('GData', [
         'desc',
@@ -36,6 +36,6 @@ def entry(title, data):
             value=percent
         ))
     return dict(
-        title=title,
+        **kwargs,
         data=new_data,
     )
