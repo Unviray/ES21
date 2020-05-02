@@ -5,7 +5,7 @@ es21.tfilter
 All template filter goes here.
 """
 
-from .translations import active
+from .const import month_short2long, month_list, pionner_short2long
 
 
 def month_name(mn):
@@ -17,7 +17,7 @@ def month_name(mn):
     month = mn.split('_')[0]
     year = mn.split('_')[1]
 
-    m = active.month_short2long.get(month, mn.capitalize())
+    m = month_short2long.get(month, mn.capitalize())
 
     try:
         return f'{m.capitalize()} {year}'
@@ -31,7 +31,7 @@ def date(d):
     """
 
     day = d.day
-    month = active.month_list[d.month - 1]
+    month = month_list[d.month - 1]
     year = d.year
 
     return f'{day} {month.title()} {year}'
@@ -44,4 +44,4 @@ def pionner_name(pcode):
 
     if pcode.istitle():
         pcode = pcode.lower()
-    return active.pionner_short2long.get(pcode, pcode)
+    return pionner_short2long.get(pcode, pcode)

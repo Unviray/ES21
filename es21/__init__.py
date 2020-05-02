@@ -16,6 +16,7 @@ from . import config, database
 from .views import (
     main,
     auxiliary,
+    regular,
     error,
     widgets, )
 
@@ -44,6 +45,7 @@ def load_views(app):
     app.add_url_rule('/', endpoint='home')
 
     app.register_blueprint(auxiliary.blueprint)
+    app.register_blueprint(regular.blueprint)
     app.register_blueprint(widgets.blueprint)
 
 

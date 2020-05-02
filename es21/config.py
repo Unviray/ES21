@@ -8,11 +8,7 @@ Base Configuration of es21.
 from pathlib import Path
 from datetime import date
 
-from .translations import active
-
-
-month_name = active.month_name
-month_short2long = active.month_short2long
+from .const import month_name, month_short2long
 
 
 class MonthBase(object):

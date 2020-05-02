@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Maharitra - {{ super() }}{% endblock %}
+
+
+{% block body %}
+    {% include 'includes/navbar.html' %}
+    <nav class="navbar sticky-top navbar-expand-md navbar-light bg-light shadow-lg d-print-none">
+        <div class="container">
+            <a class="navbar-brand h1 mb-0 mr-3" href="{{ url('regular.home') }}">Mpisavalalana maharitra</a>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        {% block container %}
+        {% endblock container %}
+    </div>
+    {% include 'includes/footer.html' %}
+{% endblock body %}
