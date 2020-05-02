@@ -7,7 +7,11 @@ All widgets goes here.
 
 from flask import Blueprint
 
-from . import pr_card, main_board, line_chart
+from . import (
+    pr_card,
+    main_board,
+    line_chart,
+    growth, )
 
 
 blueprint = Blueprint('widget', __name__, url_prefix='/widget')
@@ -27,3 +31,8 @@ blueprint.add_url_rule(
     '/line_chart',
     'line_chart',
     line_chart.entry, )
+
+blueprint.add_url_rule(
+    '/growth',
+    'growth',
+    growth.entry, )

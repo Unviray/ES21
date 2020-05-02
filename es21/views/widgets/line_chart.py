@@ -1,6 +1,8 @@
 """
 es21.views.widgets.line_chart
 =============================
+
+Display line chart.
 """
 
 from flask import jsonify
@@ -10,6 +12,13 @@ from ...utils import templated
 
 @templated('widgets/line_chart.html')
 def entry(data):
+    """
+    :param data: namedTuple who has these properties:
+    - label: List[str]
+    - legend: List[str]
+    - data: List[Tuple[int, ...]:len(legend)]
+    """
+
     length = len(data.legend)
 
     datasets = []
@@ -32,8 +41,8 @@ def entry(data):
 
 default_line = {
     'fill': False,
-    'lineTension': 0.2,
     'borderCapStyle': 'butt',
+    'cubicInterpolationMode': 'monotone',
     'borderDash': [],
     'borderDashOffset': 0.0,
     'borderJoinStyle': 'miter',

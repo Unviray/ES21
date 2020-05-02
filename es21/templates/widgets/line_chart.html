@@ -6,6 +6,7 @@
     var chartData = {{ chart_data.data.decode()|safe }}
 
     const hour_chart = document.getElementsByClassName("lineChart");
+
     window.onload = function() {
         for (i = 0; i < hour_chart.length; i++) {
             var myChart = new Chart(hour_chart[i].getContext('2d'), {

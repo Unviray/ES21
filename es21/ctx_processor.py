@@ -1,3 +1,10 @@
+"""
+es21.ctx_processor
+==================
+
+Context processor (function used in tepmlate).
+"""
+
 from werkzeug.utils import import_string
 
 from flask import (

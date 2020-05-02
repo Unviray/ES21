@@ -38,6 +38,14 @@ class DateInput(Input):
     input_type = 'date'
 
 
+class IntField(IntegerField):
+    def process_formdata(self, valuelist):
+        try:
+            super(IntField, self).process_formdata(valuelist)
+        except ValueError:
+            pass
+
+
 int_kwargs = dict(
     widget=IntegerInput(),
     validators=[Optional()],
@@ -57,11 +65,11 @@ def eval_phone(phone_number):
 
 
 class ReportForm(FlaskForm):
-    publication = IntegerField('Zavatra napetraka', **int_kwargs)
-    video = IntegerField('Video', **int_kwargs)
-    hour = IntegerField('Ora', **int_kwargs)
-    visit = IntegerField('Fiverenana mitsidika', **int_kwargs)
-    study = IntegerField('Fampianarana', **int_kwargs)
+    publication = IntField('Zavatra napetraka', **int_kwargs)
+    video = IntField('Video', **int_kwargs)
+    hour = IntField('Ora', **int_kwargs)
+    visit = IntField('Fiverenana mitsidika', **int_kwargs)
+    study = IntField('Fampianarana', **int_kwargs)
 
     remark = StringField('Fanamarihana')
 
@@ -71,12 +79,21 @@ class ReportForm(FlaskForm):
         ('Reg', 'Maharitra'), ], )
 
     def validate_hour(self, field):
+        if field.data is None:
+            raise ValidationError('Misy diso ny Ora nampidirinao')
+
         if field.data < 1:
             raise ValidationError("Tokony hiotran'ny 0 ny Ora")
 
+    def validate_visit(self, field):
+        if field.data < self.study.data:
+            raise ValidationError(
+                "Tsy mitombina ny hoe kely nohon'ny "
+                "Fampianarana ny Fiverenana mitsidika")
+
 
 class PreacherForm(FlaskForm):
-    id = IntegerField('Nomerao', **int_kwargs)
+    id = IntField('Nomerao', **int_kwargs)
 
     last_name = StringField('Anarana')
     first_name = StringField(
@@ -95,7 +112,7 @@ class PreacherForm(FlaskForm):
     birth = DateField('Teraka', **date_kwargs)
     baptism = DateField('Batisa', **date_kwargs)
 
-    group = IntegerField('Groupe', **int_kwargs)
+    group = IntField('Groupe', **int_kwargs)
     promo = SelectField('Tombotsoa', choices=[
         ('', 'Tsy misy'),
         ('Rahalahy vita Batisa', 'Rahalahy vita Batisa'),
@@ -127,7 +144,7 @@ class PreacherForm(FlaskForm):
 
 
 class EditPreacherForm(PreacherForm):
-    last_id = IntegerField('Nomerao taloha', **int_kwargs)
+    last_id = IntField('Nomerao taloha', **int_kwargs)
 
     def validate_id(self, field):
         if self.last_id.data != field.data:

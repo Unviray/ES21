@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+        {% for d in data %}
+
+            {% if d.is_increasing %}
+                <span class="text-success d-inline-flex">
+                    <span class="text-dark">
+                        {{ d.desc }}
+                    </span>
+                    <span class="material-icons px-2">
+                        trending_up
+                    </span>
+                    +
+                    {% if str(d.value) == 'inf' %}
+                        ∞
+                    {% else %}
+                    {{ round(d.value, 2) }}
+                    {% endif %}
+                </span>
+            {% else %}
+                <span class="text-danger d-inline-flex">
+                    <span class="text-dark">
+                        {{ d.desc }}
+                    </span>
+                    <span class="material-icons px-2">
+                        trending_down
+                    </span>
+                    -
+                    {% if str(d.value) == 'inf' %}
+                        100
+                    {% else %}
+                    {{ round(d.value, 2) }}
+                    {% endif %}
+            </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
