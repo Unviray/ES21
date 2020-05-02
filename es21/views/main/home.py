@@ -40,16 +40,21 @@ def entry():
     f('not_returned')
     not_returned = f.preachers
 
+    # growth widget
+    growth = [
+        growth_data('zavatra_napetraka', 'Zavatra napetraka', preacher),
+        growth_data('video', 'Video', preacher),
+        growth_data('ora', 'Ora', preacher),
+        growth_data('fitsidihana', 'Fitsidihana', preacher),
+        growth_data('fampianarana', 'Fampianarana', preacher),
+    ]
+
     return dict(
         hour_chart=hour_chart(preacher),
-        growth=[growth_hour(preacher)],
+        growth=growth,
         not_returned=not_returned,
         preacher=preacher,
         post=post, )
-
-
-def get_hour(pr, month):
-    return pr['tatitra'][str(month)]['ora']
 
 
 def post_report(preachers):
@@ -107,6 +112,9 @@ def hour_chart(preachers):
     label = []
     data = []
 
+    def get_hour(pr, month):
+        return pr['tatitra'][str(month)]['ora']
+
     for month in service_year:
         f = Filter(preachers)
         f('returned', month=str(month))
@@ -132,7 +140,7 @@ def hour_chart(preachers):
         data=data, )
 
 
-def growth_hour(preachers):
+def growth_data(id, name, preachers):
     GrowthData = namedtuple('GrowthData', ['desc', 'last', 'now'])
 
     MONTH = app.config['MONTH']
@@ -140,12 +148,15 @@ def growth_hour(preachers):
     month = str(MONTH)
     last_month = MONTH.new_me() - 1
 
+    def get_data(pr, month):
+        return pr['tatitra'][str(month)][id]
+
     f = Filter(preachers)
     f('returned', month=str(month))
     last_f = Filter(preachers)
     last_f('returned', month=str(last_month))
 
-    hour = sum([get_hour(pr, month) for pr in f.preachers])
-    last_hour = sum([get_hour(pr, last_month) for pr in last_f.preachers])
+    now_data = sum([get_data(pr, month) for pr in f.preachers])
+    last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
 
-    return GrowthData("Ora", last_hour, hour)
+    return GrowthData(name, last_data, now_data)

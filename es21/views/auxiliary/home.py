@@ -34,7 +34,17 @@ def entry():
     f('not_returned')
     not_returned = f.preachers
 
+    # growth widget
+    growth = [
+        growth_data('zavatra_napetraka', 'Zavatra napetraka', preachers),
+        growth_data('video', 'Video', preachers),
+        growth_data('ora', 'Ora', preachers),
+        growth_data('fitsidihana', 'Fitsidihana', preachers),
+        growth_data('fampianarana', 'Fampianarana', preachers),
+    ]
+
     return dict(
+        growth=growth,
         preachers=preachers,
         not_returned=not_returned,
         hour_chart=hour_chart(db.all()),
@@ -88,3 +98,25 @@ def hour_chart(preachers):
         data.append((s_hour,))
 
     return ChartData(['Ora'], label, data)
+
+
+def growth_data(id, name, preachers):
+    GrowthData = namedtuple('GrowthData', ['desc', 'last', 'now'])
+
+    MONTH = app.config['MONTH']
+
+    month = str(MONTH)
+    last_month = MONTH.new_me() - 1
+
+    def get_data(pr, month):
+        return pr['tatitra'][str(month)][id]
+
+    f = Filter(preachers)
+    f('returned', month=str(month))
+    last_f = Filter(preachers)
+    last_f('returned', month=str(last_month))
+
+    now_data = sum([get_data(pr, month) for pr in f.preachers])
+    last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
+
+    return GrowthData(name, last_data, now_data)

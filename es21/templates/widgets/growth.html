@@ -4,35 +4,37 @@
         {% for d in data %}
 
             {% if d.is_increasing %}
-                <span class="text-success d-inline-flex">
-                    <span class="text-dark">
+                <span class="text-success d-flex mini">
+                    <span class="text-dark mr-auto">
                         {{ d.desc }}
                     </span>
                     <span class="material-icons px-2">
-                        trending_up
+                        arrow_drop_up
                     </span>
                     +
-                    {% if str(d.value) == 'inf' %}
+                    {%- if str(d.value) == 'inf' -%}
                         ∞
-                    {% else %}
+                    {%- else -%}
                     {{ round(d.value, 2) }}
-                    {% endif %}
+                    {%- endif -%}
+                    %
                 </span>
             {% else %}
-                <span class="text-danger d-inline-flex">
-                    <span class="text-dark">
+                <span class="text-danger d-flex mini">
+                    <span class="text-dark mr-auto">
                         {{ d.desc }}
                     </span>
                     <span class="material-icons px-2">
-                        trending_down
+                        arrow_drop_down
                     </span>
                     -
-                    {% if str(d.value) == 'inf' %}
+                    {%- if str(d.value) == 'inf' -%}
                         100
-                    {% else %}
+                    {%- else -%}
                     {{ round(d.value, 2) }}
-                    {% endif %}
-            </span>
+                    {%- endif -%}
+                    %
+                </span>
             {% endif %}
         {% endfor %}
     </div>
