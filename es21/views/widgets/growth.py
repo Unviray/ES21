@@ -12,7 +12,11 @@ from ...utils import templated
 @templated('widgets/growth.html')
 def entry(title, data):
 
-    GData = namedtuple('GData', ['desc', 'is_increasing', 'value'])
+    GData = namedtuple('GData', [
+        'desc',
+        'is_increasing',
+        'is_same',
+        'value', ])
 
     new_data = []
     for d in data:
@@ -28,6 +32,7 @@ def entry(title, data):
         new_data.append(GData(
             desc=d.desc,
             is_increasing=(d.now >= d.last),
+            is_same=(d.now == d.last),
             value=percent
         ))
     return dict(

@@ -3,7 +3,22 @@
         <h5 class="card-title">{{ title }}</h5>
         {% for d in data %}
 
-            {% if d.is_increasing %}
+            {% if d.is_same %}
+            <span class="text-dark d-flex mini">
+                <span class="text-dark mr-auto">
+                    {{ d.desc }}
+                </span>
+                <span class="px-2">
+                    =
+                </span>
+                {%- if str(d.value) == 'inf' -%}
+                    ∞
+                {%- else -%}
+                {{ round(d.value, 2) }}
+                {%- endif -%}
+                %
+            </span>
+            {% elif d.is_increasing %}
                 <span class="text-success d-flex mini">
                     <span class="text-dark mr-auto">
                         {{ d.desc }}

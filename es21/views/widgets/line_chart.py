@@ -57,7 +57,7 @@ default_line = {
 
 def color(index, alpha):
     cl = [
-        '0,0,230',
+        '40,40,230',
         '0,200,200',
         '0,200,0',
 
