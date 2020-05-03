@@ -11,6 +11,7 @@ from tinydb import Query
 
 from ...database import get_db
 from ...utils import templated
+from ...filters import is_auxiliary
 
 
 @lru_cache()
@@ -24,4 +25,6 @@ def entry(id):
     if p is None:
         return None
 
-    return dict(p=p)
+    return dict(
+        p=p,
+        is_auxiliary=is_auxiliary()(p))
