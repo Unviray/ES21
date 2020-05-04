@@ -25,7 +25,7 @@
 
         <div class="collapse {% if on_ft %}show{% endif %} mt-4" id="filterCollapse">
             {% for filter in all_ft %}
-                <a class="btn btn{{ is_active(filter) }}-light btn-sm filter" type="button" href="{% if filter in on_ft %}{{ remove_f(filter) }}{% else %}{{ add_f(filter) }}{% endif %}">
+                <a class="btn btn{{ is_active(filter) }}-light btn-sm filter mb-1" type="button" href="{% if filter in on_ft %}{{ remove_f(filter) }}{% else %}{{ add_f(filter) }}{% endif %}">
                     {{ filter.capitalize() }}
                 </a>
             {% endfor %}

@@ -27,6 +27,7 @@ class Filter(object):
         self.register_filter(is_auxiliary)
         self.register_filter(is_regular)
         self.register_filter(in_group, searchable=False)
+        self.register_filter(assistant)
 
     @property
     def all_filters(self):
@@ -130,5 +131,16 @@ def in_group(gid):
             return preacher['groupe'] == int(gid)
         except TypeError:
             return True
+
+    return func
+
+
+def assistant():
+    """
+    Check if preacher is assistant
+    """
+
+    def func(preacher):
+        return preacher['tombotsoa'] == "Mpanampy amin'ny fanompoana"
 
     return func

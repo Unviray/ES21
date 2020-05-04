@@ -79,13 +79,15 @@ filter_name = {
     'returned': 'namerina',
     'not_returned': 'tsy namerina',
     'is_regular': 'mpisavalalana maharitra',
-    'is_auxiliary': 'mpisavalalana mpanampy', }
+    'is_auxiliary': 'mpisavalalana mpanampy',
+    'assistant': "mpanampy amin'ny fanompoana", }
 
 reverse_filter_name = {
     'namerina': 'returned',
     'tsy namerina': 'not_returned',
     'mpisavalalana maharitra': 'is_regular',
-    'mpisavalalana mpanampy': 'is_auxiliary', }
+    'mpisavalalana mpanampy': 'is_auxiliary',
+    "mpanampy amin'ny fanompoana": 'assistant', }
 
 
 color_chart = {
