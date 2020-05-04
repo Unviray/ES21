@@ -113,6 +113,16 @@
             <h4>Ora nandritran'ny taom-panompoana</h4>
             {{ widget('line_chart', data=hour_chart)|safe }}
         </div>
+
+        <div class="mt-4">
+            <div class="row">
+                {% for grp in grp_list %}
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <a class="btn btn-light btn-block border" href="{{ url('group.home', gid=grp) }}">Andiampitory {{ grp }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
     <div class="col-lg-3">
         <a class="btn btn-primary btn-block mb-3 mt-0 d-none d-lg-block" href="{{ url('main.new') }}">Hampiditra mpitory vaovao</a>

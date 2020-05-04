@@ -17,6 +17,7 @@ from .views import (
     main,
     auxiliary,
     regular,
+    group,
     error,
     widgets, )
 
@@ -47,6 +48,7 @@ def load_views(app):
     app.register_blueprint(auxiliary.blueprint)
     app.register_blueprint(regular.blueprint)
     app.register_blueprint(widgets.blueprint)
+    app.register_blueprint(group.blueprint)
 
 
 def load_template_filter(app):

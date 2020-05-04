@@ -62,7 +62,7 @@ def entry():
     if len(ft.preachers) == 1:
         return redirect(url('main.preacher', id=ft.preachers[0]['id']))
 
-    all_ft = [filter_name[_] for _ in list(ft.filters)]
+    all_ft = [filter_name[_] for _ in list(ft.all_filters)]
     on_ft = [filter_name[_] for _ in ft.filtered_by]
 
     def is_active(ft):

@@ -20,7 +20,7 @@ from ...utils import templated, navbar_form, get_service_year
 from ...database import get_db
 from ...forms import ReportForm
 
-from ...filters import returned
+from ...filters import returned, is_auxiliary
 
 
 q = Query()
@@ -54,6 +54,7 @@ def entry(id):
         report=report,
         months=months,
         has_report=has_report,
+        is_auxiliary=is_auxiliary()(preacher),
         form=report_handler.form, )
 
 

@@ -31,6 +31,9 @@
                     {% if pr['maharitra'] %}
                     <a href="{{ url('regular.home') }}" class="badge rounded-pill bg-warning text-dark">Mpisavalalana Maharitra</a>
                     {% endif %}
+                    {% if is_auxiliary %}
+                    <a href="{{ url('auxiliary.home') }}" class="badge rounded-pill bg-info text-light">Mpisavalalana Mpanampy</a>
+                    {% endif %}
                 </div>
 
                 <div class="collapse multi-collapse" id="info">

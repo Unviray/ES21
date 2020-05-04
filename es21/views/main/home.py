@@ -57,6 +57,7 @@ def entry():
     ]
 
     return dict(
+        grp_list=group_number(preacher),
         hour_chart=hour_chart(preacher),
         growth=growth,
         growth_six=growth_six,
@@ -226,3 +227,12 @@ def growth_data_six(id, name, preachers):
     ]) / 6
 
     return GrowthData(name, last_data, now_data)
+
+
+def group_number(preachers):
+    grp_list = []
+    for preacher in preachers:
+        if preacher['groupe'] not in grp_list:
+            grp_list.append(preacher['groupe'])
+
+    return sorted(grp_list)
