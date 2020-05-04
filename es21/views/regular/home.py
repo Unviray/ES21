@@ -16,7 +16,7 @@ from ...database import get_db
 from ...filters import Filter, returned
 
 
-@templated('regular/home.html')
+@templated('group/home.html')
 @navbar_form
 def entry():
     db = get_db()
@@ -46,6 +46,10 @@ def entry():
     ]
 
     return dict(
+        id='is_regular',
+        short_name='maharitra',
+        name='mpisavalalana maharitra',
+
         growth=growth,
         growth_six=growth_six,
         preachers=preachers,
