@@ -9,6 +9,7 @@ from flask import Blueprint
 
 from . import (
     pr_card,
+    pr_card_uncached,
     main_board,
     line_chart,
     growth, )
@@ -21,6 +22,10 @@ blueprint.add_url_rule(
     '/pr_card',
     'pr_card',
     pr_card.entry, )
+blueprint.add_url_rule(
+    '/pr_card_uncached',
+    'pr_card_uncached',
+    pr_card_uncached.entry, )
 
 blueprint.add_url_rule(
     '/main_board',

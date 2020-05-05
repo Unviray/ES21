@@ -49,6 +49,7 @@ def entry(gid):
         id=f'group_{gid}',
         short_name=f'and {gid}',
         name=f'Andiam-pitory {gid}',
+        color='dark',
 
         growth=growth,
         growth_six=growth_six,

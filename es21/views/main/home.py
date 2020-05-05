@@ -59,6 +59,7 @@ def entry():
     return dict(
         grp_list=group_number(preacher),
         hour_chart=hour_chart(preacher),
+        color='dark',
         growth=growth,
         growth_six=growth_six,
         not_returned=not_returned,

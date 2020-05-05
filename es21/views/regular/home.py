@@ -49,6 +49,7 @@ def entry():
         id='is_regular',
         short_name='maharitra',
         name='mpisavalalana maharitra',
+        color='warning',
 
         growth=growth,
         growth_six=growth_six,

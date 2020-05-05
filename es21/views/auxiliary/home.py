@@ -54,6 +54,7 @@ def entry():
         id='is_auxiliary',
         short_name='mpanampy',
         name='mpisavalalana mpanampy',
+        color='info',
 
         growth=growth,
         growth_six=growth_six,

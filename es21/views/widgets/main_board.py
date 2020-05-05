@@ -7,5 +7,5 @@ from ...utils import templated
 
 
 @templated('widgets/main_board.html')
-def entry(content):
-    return dict(content=content)
+def entry(content, color='dark'):
+    return dict(content=content, color=color)
