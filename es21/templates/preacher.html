@@ -163,6 +163,9 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-3">
+                {{ widget('line_chart', data=hour_chart)|safe }}
+            </div>
         </div>
         <div class="col-lg-3">
             <button class="btn btn-light btn-block border d-flex" type="button" data-toggle="modal" data-target="#auxiliaryModal"

@@ -71,6 +71,7 @@ def entry(id):
         months=months,
         growth=growth,
         growth_six=growth_six,
+        hour_chart=hour_chart([preacher]),
         has_report=has_report,
         is_auxiliary=is_auxiliary()(preacher),
         form=report_handler.form, )
@@ -240,6 +241,28 @@ def auxiliary_check(id):
                 name=service_month.prettie(), ))
 
     return months
+
+
+def hour_chart(preachers):
+    service_year = get_service_year()
+    ChartData = namedtuple('ChartData', ['legend', 'id', 'label', 'data'])
+
+    label = []
+    data = []
+
+    for month in service_year:
+        fr = Filter(preachers)
+        fr('returned', month=str(month))
+
+        if len(fr.preachers) != 0:
+            s_hour = fr.preachers[0]['tatitra'][str(month)]['ora']
+        else:
+            s_hour = 0
+
+        label.append(month.prettie('{short_month} {short_year}'))
+        data.append((s_hour,))
+
+    return ChartData(['Ora'], ['grp'], label, data)
 
 
 def growth_data(id, name, preachers):
