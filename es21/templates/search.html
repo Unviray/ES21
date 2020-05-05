@@ -8,7 +8,7 @@
 
 {% include 'includes/navbar.html' %}
 
-<div class="bg-dark text-light mt-0 mb-4">
+<div class="bg-dark text-light mt-0 mb-3">
     <div class="container py-4">
         <form class="form-inline" method="post">
             <label class="h3 d-none d-sm-block" for="search">Hitady</label>
@@ -34,6 +34,7 @@
 </div>
 
 <div class="container">
+    <p>Isan'ny valiny <span class="badge bg-light text-dark">{{ len(preacher) }} / {{ len(all) }}</span></p>
     <div class="row">
         {% for p in preacher %}
         <div class="col-md-6 mb-3">

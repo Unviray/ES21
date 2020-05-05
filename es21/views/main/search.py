@@ -96,4 +96,5 @@ def entry():
 
         hide_search=True,
         is_active=is_active,
-        preacher=ft.preachers, )
+        preacher=ft.preachers,
+        all=db.all(), )
