@@ -80,14 +80,16 @@ filter_name = {
     'not_returned': 'tsy namerina',
     'is_regular': 'mpisavalalana maharitra',
     'is_auxiliary': 'mpisavalalana mpanampy',
-    'assistant': "mpanampy amin'ny fanompoana", }
+    'assistant': "mpanampy amin'ny fanompoana",
+    'bap_one_year': "vita batisa herintaona", }
 
 reverse_filter_name = {
     'namerina': 'returned',
     'tsy namerina': 'not_returned',
     'mpisavalalana maharitra': 'is_regular',
     'mpisavalalana mpanampy': 'is_auxiliary',
-    "mpanampy amin'ny fanompoana": 'assistant', }
+    "mpanampy amin'ny fanompoana": 'assistant',
+    "vita batisa herintaona": 'bap_one_year', }
 
 
 color_chart = {

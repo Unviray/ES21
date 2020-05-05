@@ -28,6 +28,7 @@ class Filter(object):
         self.register_filter(is_regular)
         self.register_filter(in_group, searchable=False)
         self.register_filter(assistant)
+        self.register_filter(bap_one_year)
 
     @property
     def all_filters(self):
@@ -107,7 +108,11 @@ def is_auxiliary(month=None):
 
     # TODO: change this to a decorator 'with_month'
     month = month or str(app.config['MONTH'])
-    ids = mdb.get(q.volana == month)['mpitory']
+
+    try:
+        ids = mdb.get(q.volana == month)['mpitory']
+    except TypeError:
+        return lambda: False
 
     return lambda preacher: preacher['id'] in ids
 
@@ -142,5 +147,26 @@ def assistant():
 
     def func(preacher):
         return preacher['tombotsoa'] == "Mpanampy amin'ny fanompoana"
+
+    return func
+
+
+def bap_one_year(month=None):
+    """
+    Check if preacher reached one year in baptism
+    :return: a function for filter()
+    """
+
+    # TODO: change this to a decorator 'with_month'
+    month = month or app.config['MONTH']
+
+    def func(preacher):
+        try:
+            ok_month = preacher['batisa'].month == month.month
+            ok_year = preacher['batisa'].year == month.year - 1
+        except AttributeError:
+            return False
+
+        return (ok_month and ok_year)
 
     return func

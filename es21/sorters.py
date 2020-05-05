@@ -23,7 +23,12 @@ def tri_pionner(preachers, month=None):
 
     mdb = get_db('mpanampy')
     month = month or str(app.config['MONTH'])
-    aux_list = mdb.get(q.volana == month)['mpitory']
+    aux_list = mdb.get(q.volana == month)
+
+    try:
+        aux_list = aux_list['mpitory']
+    except TypeError:
+        aux_list = []
 
     non = []  # basic preachers
     aux = []  # auxiliar pionner
