@@ -73,9 +73,15 @@
         </div>
 
     </div>
-    <div class="col-lg-3 d-none d-lg-block">
-        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny volana teo aloha", data=growth)|safe }}
-        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
+    <div class="col-lg-3">
+        <div class="row">
+            <div class="col-12 col-sm 6 col-lg-12">
+                {{ widget('growth', title='Fitombona', description="Hoarina amin'ny volana teo aloha", data=growth)|safe }}
+            </div>
+            <div class="col-12 col-sm-6 col-lg-12">
+                {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock container %}

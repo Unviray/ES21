@@ -20,3 +20,9 @@ html, body {
 .filter:hover {
     color: #000000!important;
 }
+
+@media (min-width: 992px) {
+    .profile-title {
+        max-height: 106px;
+    }
+}

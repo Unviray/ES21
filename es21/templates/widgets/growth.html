@@ -1,4 +1,4 @@
-<div class="card mt-3">
+<div class="card mt-3 mt-lg-0 mb-3">
     <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
         <p class="lead mini">{{ description }}</p>
@@ -20,37 +20,37 @@
                 %
             </span>
             {% elif d.is_increasing %}
-                <span class="text-success d-flex mini">
-                    <span class="text-dark mr-auto">
-                        {{ d.desc }}
-                    </span>
-                    <span class="material-icons px-2">
-                        arrow_drop_up
-                    </span>
-                    +
-                    {%- if str(d.value) == 'inf' -%}
-                        ∞
-                    {%- else -%}
-                    {{ round(d.value, 2) }}
-                    {%- endif -%}
-                    %
+            <span class="text-success d-flex mini">
+                <span class="text-dark mr-auto">
+                    {{ d.desc }}
                 </span>
+                <span class="material-icons px-2">
+                    arrow_drop_up
+                </span>
+                +
+                {%- if str(d.value) == 'inf' -%}
+                    ∞
+                {%- else -%}
+                {{ round(d.value, 2) }}
+                {%- endif -%}
+                %
+            </span>
             {% else %}
-                <span class="text-danger d-flex mini">
-                    <span class="text-dark mr-auto">
-                        {{ d.desc }}
-                    </span>
-                    <span class="material-icons px-2">
-                        arrow_drop_down
-                    </span>
-                    -
-                    {%- if str(d.value) == 'inf' -%}
-                        100
-                    {%- else -%}
-                    {{ round(d.value, 2) }}
-                    {%- endif -%}
-                    %
+            <span class="text-danger d-flex mini">
+                <span class="text-dark mr-auto">
+                    {{ d.desc }}
                 </span>
+                <span class="material-icons px-2">
+                    arrow_drop_down
+                </span>
+                -
+                {%- if str(d.value) == 'inf' -%}
+                    100
+                {%- else -%}
+                {{ round(d.value, 2) }}
+                {%- endif -%}
+                %
+            </span>
             {% endif %}
         {% endfor %}
     </div>

@@ -16,7 +16,7 @@ from ...filters import is_auxiliary
 
 @lru_cache()
 @templated('widgets/pr_card.html')
-def entry(id):
+def entry(id, use_long_name=False):
     db = get_db()
     q = Query()
 
@@ -27,4 +27,5 @@ def entry(id):
 
     return dict(
         p=p,
+        use_long_name=use_long_name,
         is_auxiliary=is_auxiliary()(p))

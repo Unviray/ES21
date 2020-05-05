@@ -6,7 +6,12 @@
         </div>
         <div class="card-body p-3">
             <h5 class="card-title mb-1">
+                {% if use_long_name and p['anarana_feno'] != '' %}
+                <span class="d-md-none">{{ p['anarana'] }} <strong>{{ p['fanampinanarana'] }}</strong></span>
+                <span class="d-none d-md-inline">{{ p['anarana_feno'] }}</span>
+                {% else %}
                 {{ p['anarana'] }} <strong>{{ p['fanampinanarana'] }}</strong>
+                {% endif %}
             </h5>
 
             <div style="height: 25px;">

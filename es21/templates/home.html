@@ -125,10 +125,16 @@
         </div>
     </div>
     <div class="col-lg-3">
-        <a class="btn btn-primary btn-block mb-3 mt-0 d-none d-lg-block" href="{{ url('main.new') }}">Hampiditra mpitory vaovao</a>
+        <a class="btn btn-primary btn-block mt-0 mb-3 d-none d-lg-block" href="{{ url('main.new') }}">Hampiditra mpitory vaovao</a>
 
-        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny volana teo aloha", data=growth)|safe }}
-        {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
+        <div class="row">
+            <div class="col-12 col-sm 6 col-lg-12">
+                {{ widget('growth', title='Fitombona', description="Hoarina amin'ny volana teo aloha", data=growth)|safe }}
+            </div>
+            <div class="col-12 col-sm-6 col-lg-12">
+                {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

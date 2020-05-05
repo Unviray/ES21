@@ -5,103 +5,84 @@
 
 
 {% block body %}
-{% include 'includes/navbar.html' %}
-<nav class="py-2 sticky-sm-top navbar-expand-md navbar-light bg-white shadow-lg d-print-none profile-title">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                {{ widget('pr_card', id=pr['id'], use_long_name=True)|safe }}
+{% include "includes/navbar.html" %}
+<div class="bg-dark text-light">
+    <div class="container-md">
+        <div class="d-flex flex-row my-3">
+            {# num block #}
+            <div class="d-flex flex-shrink-1 bg-{{ color_returned(pr) }} flex-column p-3">
+                <div class="text-light h1">{{ pr['id'] }}</div>
+                <a class="text-light h2 mt-auto text-center" href="">{{ pr['groupe'] }}</a>
             </div>
-            <div class="col-lg-3 d-flex flex-column">
-                <a class="btn btn-light btn-block my-lg-auto mt-3" data-toggle="collapse" href=".detail-collapse"
-                    aria-expanded="false">
-                    <div class="collapse show detail-collapse mx-auto my-0 py-0">
-                        Mombamomba azy
-                    </div>
-
-                    <div class="d-flex flex-column my-0 py-0">
-                        <div class="collapse show detail-collapse mx-auto my-0 py-0">
-                            <i class="material-icons d-flex">keyboard_arrow_down</i>
-                        </div>
-                        <div class="collapse detail-collapse mx-auto my-0 py-2">
-                            <i class="material-icons d-flex">keyboard_arrow_up</i>
-                        </div>
-                    </div>
-
-                    <div class="collapse detail-collapse mx-auto my-0 py-0">
-                        <div class="row">
-                            {% if pr['finday'] != ["", "", ""] %}
-                            <div class="mb-4 col-6 col-md-3 col-lg-12">
-                                <h3 class="h3"><i class="material-icons">phone</i> Tel</h3>
-                                <ul class="list-unstyled">
-                                    {% for phone in pr['finday'] %}
-                                    <li>{{ phone }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% endif %}
-
-                            {% if pr['adiresy'] %}
-                            <div class="mb-4 col-6 col-md-3 col-lg-12">
-                                <h3 class="h3"><i class="material-icons">place</i> Adiresy</h3>
-                                <ul class="list-unstyled">
-                                    <li>{{ pr['adiresy'] }}</li>
-                                </ul>
-                            </div>
-                            {% endif %}
-
-                            {% if pr['teraka'] %}
-                            <div class="mb-4 col-6 col-md-3 col-lg-12">
-                                <h3 class="h3"><i class="material-icons">today</i> Teraka</h3>
-                                <ul class="list-unstyled">
-                                    <li>{{ pr['teraka']|date }}</li>
-                                </ul>
-                            </div>
-                            {% endif %}
-
-                            {% if pr['batisa'] %}
-                            <div class="mb-4 col-6 col-md-3 col-lg-12">
-                                <h3 class="h3"><i class="material-icons">today</i> Batisa</h3>
-                                <ul class="list-unstyled">
-                                    <li>{{ pr['batisa']|date }}</li>
-                                </ul>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
+            {# name title #}
+            <div class="p-3 pl-2 pl-sm-3 pl-md-5 pb-0">
+                <a class="h1 mb-0 text-decoration-none text-reset" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
+                    {% if pr['anarana_feno'] == "" %}
+                    {{ pr['anarana']}} <strong>{{ pr['fanampinanarana'] }}</strong>
+                    {% else %}
+                    {{ pr['anarana_feno'] }}
+                    {% endif %}
                 </a>
-                <div class="collapse detail-collapse mx-auto my-3 py-0">
-                    <div class="d-flex bg-light p-2 rounded shadow">
-                        <a class="btn btn-outline-dark d-flex mr-2" href="{{ url('main.edit', id=pr['id']) }}">
-                            <i class="material-icons">edit</i>
-                        </a>
-                        <button type="button" class="btn btn-block btn-outline-danger d-flex" data-toggle="modal"
-                            data-target="#deleteModal">
+
+                <div class="mb-3">
+                    {% if pr['tombotsoa'] %}
+                    <span class="badge rounded-pill bg-primary text-light">{{ pr['tombotsoa'] }}</span>
+                    {% endif %}
+                    {% if pr['maharitra'] %}
+                    <a href="{{ url('regular.home') }}" class="badge rounded-pill bg-warning text-dark">Mpisavalalana Maharitra</a>
+                    {% endif %}
+                    {% if is_auxiliary %}
+                    <a href="{{ url('auxiliary.home') }}" class="badge rounded-pill bg-info text-light">Mpisavalalana Mpanampy</a>
+                    {% endif %}
+                </div>
+
+                <div class="collapse multi-collapse" id="info">
+                    <div class="d-flex">
+                        <a class="btn btn-light d-flex mr-2" href="{{ url('main.edit', id=pr['id']) }}"><i class="material-icons">edit</i></a>
+                        <button type="button" class="btn btn-danger d-flex mr-2" data-toggle="modal" data-target="#deleteModal">
                             <i class="material-icons">delete</i>
+                        </button>
+
+                        <button
+                            class="btn btn-light d-flex"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#auxiliaryModal"
+                            {% if pr['maharitra'] %}disabled{% endif %}>
+                                <i class="material-icons mr-sm-2">add</i>
+                                <span class="d-none d-sm-inline">Mpisavalalala Mpanampy</span>
                         </button>
                     </div>
                 </div>
+
+                <a class="h1 mb-0 text-decoration-none text-reset" data-toggle="collapse" href=".multi-collapse" role="button" aria-expanded="false">
+                    <div class="d-flex flex-column my-0 py-0">
+                        <div class="collapse show multi-collapse mx-auto my-0 py-0">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                        <div class="collapse multi-collapse mx-auto mt-3 py-0">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-</nav>
+</div>
 
-
-<div class="container-md mt-3">
+<div class="container-md">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 mt-3">
             <div class="row">
                 <div class="col-sm-5 col-md-4 mb-3 overflow-auto m-list">
 
                     <!-- Button trigger modal -->
                     {% if has_report %}
-                    <button type="button" class="btn btn-outline-primary btn-block mb-3" data-toggle="modal"
-                        data-target="#reportModal">
+                    <button type="button" class="btn btn-outline-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
                         Hanavao tatitra
                     </button>
                     {% else %}
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal"
-                        data-target="#reportModal">
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#reportModal">
                         Hampiditra tatitra
                     </button>
                     {% endif %}
@@ -111,9 +92,7 @@
                             <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                 {% for month in report %}
                                 <li class="nav-item">
-                                    <a class="nav-link{% if loop.first %} active{% endif %}" id="{{ month }}-tab"
-                                        data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}"
-                                        aria-selected="true">
+                                    <a class="nav-link{% if loop.first %} active{% endif %}" id="{{ month }}-tab" data-toggle="tab" href="#{{ month }}" role="tab" aria-controls="{{ month }}" aria-selected="true">
                                         {{ month|month_name }}
                                     </a>
                                 </li>
@@ -125,12 +104,10 @@
                 <div class="col-sm-7 col-md-8">
                     <div class="tab-content" id="myTabContent">
                         {% for month in report %}
-                        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="{{ month }}"
-                            role="tabpanel" aria-labelledby="{{ month }}-tab">
+                        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="{{ month }}" role="tabpanel" aria-labelledby="{{ month }}-tab">
                             <h3 class="h4 mb-4">
                                 {{ month|month_name }}
-                                <span
-                                    class="badge rounded-pill bg-{% if report[month]['mpisavalalana'] == 'Aux' %}info{% else %}warning text-dark{% endif %} text-light text-capitalize">{{ report[month]['mpisavalalana']|pionner_name }}</span>
+                            <span class="badge rounded-pill bg-primary text-light text-capitalize">{{ report[month]['mpisavalalana']|pionner_name }}</span>
                             </h3>
 
                             <table class="table table-bordered">
@@ -164,25 +141,57 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-light btn-block border d-flex" type="button" data-toggle="modal" data-target="#auxiliaryModal"
-                {% if pr['maharitra'] %}disabled{% endif %}>
-                <i class="material-icons mr-2">add</i>
-                <span>Mpisavalalala Mpanampy</span>
-            </button>
+        <div class="col-md-3 order-first mt-md-3 order-md-last bg-dark text-light shadow p-4">
+            <div class="row">
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['finday'] != ["", "", ""] %}
+                    <h3 class="h3"><i class="material-icons">phone</i> Tel</h3>
+                    <ul class="list-unstyled">
+                        {% for phone in pr['finday'] %}
+                            <li>{{ phone }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['adiresy'] %}
+                    <h3 class="h3"><i class="material-icons">place</i> Adiresy</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['adiresy'] }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['teraka'] %}
+                    <h3 class="h3"><i class="material-icons">today</i> Teraka</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['teraka']|date }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4 col-6 col-sm-3 col-md-12">
+                    {% if pr['batisa'] %}
+                    <h3 class="h3"><i class="material-icons">today</i> Batisa</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ pr['batisa']|date }}</li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 
 <!-- Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="reportModalLabel">Tatitra volana: <strong>{{ MONTH.prettie() }}</strong>
-                </h5>
+                <h5 class="modal-title" id="reportModalLabel">Tatitra volana: <strong>{{ MONTH.prettie() }}</strong></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -209,11 +218,11 @@
                             {{ form.publication.label }}
                         </div>
                         <div class="col-3">
-                            {% if form.publication.errors %}
-                            {{ form.publication(class="form-control is-invalid") }}
-                            {% else %}
-                            {{ form.publication(class="form-control") }}
-                            {% endif %}
+                           {% if form.publication.errors %}
+                           {{ form.publication(class="form-control is-invalid") }}
+                           {% else %}
+                           {{ form.publication(class="form-control") }}
+                           {% endif %}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -300,8 +309,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -325,8 +333,7 @@
                     Soraty eto ambany ny anaran'ilay mpitory ho fanamafisana
                 </p>
             </div>
-            <form class="justify-content-center mx-3 mb-3" method="post"
-                action="{{ url_for('main.delete', id=pr['id']) }}">
+            <form class="justify-content-center mx-3 mb-3" method="post" action="{{ url_for('main.delete', id=pr['id']) }}">
                 <input class="form-control" name="name" type="text" aria-label="anarana">
                 <button class="btn btn-block btn-outline-danger mt-3" type="submit">Hamafa</button>
             </form>
@@ -334,8 +341,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="auxiliaryModal" tabindex="-1" role="dialog" aria-labelledby="auxiliaryModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="auxiliaryModal" tabindex="-1" role="dialog" aria-labelledby="auxiliaryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -353,21 +359,20 @@
                         {% for month in months %}
                         <div class="col-6 btn-group-toggle px-1 pb-1" data-toggle="buttons">
                             <label class="btn btn-block btn-outline-secondary {{ month.active }}">
-                                <input type="checkbox" name="{{ month.id }}" id="{{ month.id }}" autocomplete="off"
-                                    {{ month.checked }}>
+                                <input type="checkbox" name="{{ month.id }}" id="{{ month.id }}" autocomplete="off" {{ month.checked }}>
                                 {{ month.name }}
                             </label>
                         </div>
                         {% endfor %}
                     </div>
-                    <button class="btn btn-primary btn-block mt-2" type="submit">Hampidirina</button>
+                <button class="btn btn-primary btn-block mt-2" type="submit">Hampidirina</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-{% include 'includes/footer.html' %}
+{% include "includes/footer.html" %}
 {% endblock %}
 
 
@@ -375,7 +380,7 @@
 
 {% if form.errors %}
 <script>
-    const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+    const reportModal= new bootstrap.Modal(document.getElementById('reportModal'));
     reportModal.show();
 </script>
 {% endif %}
