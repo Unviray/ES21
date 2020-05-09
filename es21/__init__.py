@@ -9,6 +9,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask
+
 from . import tfilter
 from . import ctx_processor
 from . import config, database

@@ -1,6 +1,8 @@
 """
 es21.views.widgets.growth
 =========================
+
+Show growing success ex: +56%.
 """
 
 from math import inf

@@ -82,6 +82,12 @@
                 {{ widget('growth', title='Fitombona', description="Hoarina amin'ny salan'isa nandritran'ny 6 volana teo aloha", data=growth_six)|safe }}
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-sm 6 col-lg-12">
+                {{ widget('number', preachers=preachers)|safe }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock container %}
