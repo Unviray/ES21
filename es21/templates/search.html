@@ -35,15 +35,38 @@
 
 <div class="container">
     <p>Isan'ny valiny <span class="badge bg-light text-dark">{{ len(preacher) }} / {{ len(all) }}</span></p>
-    <div class="row">
-        {% for p in preacher %}
-        <div class="col-md-6 mb-3">
-            {{ widget('pr_card', id=p['id'])|safe }}
-        </div>
-        {% endfor %}
+    <div class="row" id="result">
     </div>
 </div>
 
 {% include 'includes/footer.html' %}
 
 {% endblock %}
+
+
+{% block script %}
+    <script>
+        function ajax(text, func) {
+            var result = ''
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', text);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    result = xhr.responseText;
+                    func(result);
+                }
+            }
+            xhr.send(null);
+        }
+
+        function push(template) {
+            var startTag = '<div class="col-md-6 mb-3">'
+            var endTag = '</div>'
+            $("#result").append(startTag + template + endTag);
+        }
+
+        {% for p in preacher %}
+        ajax("{{ url('widget.pr_card_uncached', id=p['id']) }}", push);
+        {% endfor %}
+    </script>
+{% endblock script %}
