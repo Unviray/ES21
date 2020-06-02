@@ -28,9 +28,10 @@
         {% include "includes/toast.html" %}
 
         <script src="{{ url('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url('static', filename='js/popper.min.js') }}"></script>
         <script src="{{ url('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url('static', filename='js/cleave.min.js') }}""></script>
-        <script src="{{ url('static', filename='js/cleave-phone.mg.js') }}""></script>
+        <script src="{{ url('static', filename='js/cleave.min.js') }}"></script>
+        <script src="{{ url('static', filename='js/cleave-phone.mg.js') }}"></script>
         <script src="{{ url('static', filename='js/Chart.min.js') }}"></script>
 
         <script>
@@ -44,6 +45,10 @@
                 t._config.delay = 5000;
                 t.show();
             }
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
         </script>
 
         {% block script %}

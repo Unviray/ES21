@@ -166,6 +166,64 @@
             <div class="mb-3">
                 {{ widget('line_chart', data=hour_chart)|safe }}
             </div>
+            <div class="mb-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Volana</th>
+                            <th scope="col">
+                                <div class="d-flex" title="Zavatra napetraka">
+                                    <i class="material-icons ml-auto">library_books</i>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="d-flex" title="Video">
+                                    <i class="material-icons ml-auto">video_library</i>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="d-flex" title="Ora">
+                                    <i class="material-icons ml-auto">query_builder</i>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="d-flex" title="Fiverenana mitsidika">
+                                    <i class="material-icons ml-auto">transfer_within_a_station</i>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="d-flex" title="Fampianarana">
+                                    <i class="material-icons ml-auto">local_library</i>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in all_table %}
+                        <tr class="{% if row.hour == 0 %}text-black-50{% endif %}
+                                   text-right
+                                   {% if loop.index > 12 %}
+                                   bg-light
+                                   {% endif %}
+                                   " data-toggle="tooltip"
+                            data-placement="right"
+                            title="{{ row.remark }}">
+                            <th scope="row" class="text-left">{{ row.month.prettie() }}</th>
+                            <td>{{ row.publication }}</td>
+                            <td>{{ row.video }}</td>
+                            <td>{{ row.hour }}</td>
+                            <td>{{ row.visit }}</td>
+                            <td>{{ row.study }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <!-- <tfoot>
+                        <tr>
+                            <th>#</th>
+                        </tr>
+                    </tfoot> -->
+                </table>
+            </div>
         </div>
         <div class="col-lg-3">
             <button class="btn btn-light btn-block border d-flex" type="button" data-toggle="modal" data-target="#auxiliaryModal"

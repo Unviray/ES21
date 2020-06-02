@@ -74,6 +74,7 @@ def entry(id):
         hour_chart=hour_chart([preacher]),
         has_report=has_report,
         is_auxiliary=is_auxiliary()(preacher),
+        all_table=all_table([preacher]),
         form=report_handler.form, )
 
 
@@ -340,3 +341,87 @@ def growth_data_six(id, name, preachers):
     ]) / 6
 
     return GrowthData(name, last_data, now_data)
+
+
+def all_table(preachers):
+    """
+    Report table of current field service.
+    """
+
+    Row = namedtuple('Row', ['month',
+                             'publication',
+                             'video',
+                             'hour',
+                             'visit',
+                             'study',
+                             'remark',
+                             'auxiliary'])
+
+    service_year = get_service_year()
+
+    result = []
+    n_returned = 0
+    for month in service_year:
+        fr = Filter(preachers)
+        fr('returned', month=str(month))
+
+        if len(fr.preachers) != 0:
+            report = fr.preachers[0]['tatitra'][str(month)]
+
+            result.append(Row(
+                month=month,
+                publication=report['zavatra_napetraka'],
+                video=report['video'],
+                hour=report['ora'],
+                visit=report['fitsidihana'],
+                study=report['fampianarana'],
+                remark=report['fanamarihana'],
+                auxiliary=is_auxiliary(str(month))(fr.preachers[0],)
+            ))
+
+            n_returned += 1
+        else:
+            result.append(Row(
+                month=month,
+                publication=0,
+                video=0,
+                hour=0,
+                visit=0,
+                study=0,
+                remark='',
+                auxiliary=is_auxiliary(str(month))(preachers[0],)
+            ))
+
+    class custom_month(object):
+        def __init__(self, name):
+            self.name = name
+
+        def prettie(self):
+            return self.name
+
+    total = Row(
+        month=custom_month('Total'),
+        publication=sum([_.publication for _ in result]),
+        video=sum([_.video for _ in result]),
+        hour=sum([_.hour for _ in result]),
+        visit=sum([_.visit for _ in result]),
+        study=sum([_.study for _ in result]),
+        remark='',
+        auxiliary=False,
+    )
+
+    moyen = Row(
+        month=custom_month('Moyen'),
+        publication=round(total.publication / n_returned, 2),
+        video=round(total.video / n_returned, 2),
+        hour=round(total.hour / n_returned, 2),
+        visit=round(total.visit / n_returned, 2),
+        study=round(total.study / n_returned, 2),
+        remark='',
+        auxiliary=False,
+    )
+
+    result.append(total)
+    result.append(moyen)
+
+    return result
