@@ -31,6 +31,8 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
+    app.config['PATH'].mkdir(parents=True, exist_ok=True)
+
     database.init_app(app)
 
     load_views(app)

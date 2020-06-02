@@ -141,12 +141,10 @@ class ReportHandler(object):
         if self.has_report:
             return False
 
-        mdb = get_db('mpanampy')
-
         if self.preacher.get('maharitra', False):
             return 'Reg'
 
-        elif self.preacher['id'] in mdb.get(q.volana == MONTH)['mpitory']:
+        elif is_auxiliary(MONTH)(self.preacher):
             return 'Aux'
 
         else:

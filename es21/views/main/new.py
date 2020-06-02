@@ -7,6 +7,7 @@ Creating new preacher.
 
 from flask import (
     flash,
+    request,
     redirect,
     url_for as url, )
 
@@ -32,7 +33,8 @@ def entry():
 
     return dict(
         title='Mpitory vaovao',
-        form=new_preacher_handler.form, )
+        form=new_preacher_handler.form,
+        hide_search=request.args.get('hide_search', False), )
 
 
 class NewPreacherHandler(object):

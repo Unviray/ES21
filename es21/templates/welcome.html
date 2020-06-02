@@ -9,7 +9,9 @@
         <p class="lead">Ho fanombohana dia mampidira mpitory iray.</p>
 
         <p class="lead d-flex justify-content-center">
-            <a href="#" class="btn btn-secondary border-dark bg-dark d-flex justify-content-center" id="newButton" style="width: 150px;">
+            <a href="{{ url('main.new', hide_search=True) }}"
+                class="btn btn-secondary border-dark bg-dark d-flex justify-content-center" id="newButton"
+                style="width: 150px;">
                 <i class="material-icons">add</i>
             </a>
         </p>
@@ -20,8 +22,13 @@
 
 {% block script %}
 <script>
-const newButton = $('#newButton');
-newButton.mouseenter(function() {newButton.html("Mpitory vaovao")});
-newButton.mouseleave(function() {newButton.html('<i class="material-icons">add</i>')});
+    const newButton = $('#newButton');
+    newButton.mouseenter(function () {
+        newButton.html("Mpitory vaovao")
+    });
+    newButton.mouseleave(function () {
+        newButton.html('<i class="material-icons">add</i>')
+    });
+
 </script>
 {% endblock %}

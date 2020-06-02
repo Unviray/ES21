@@ -112,7 +112,7 @@ def is_auxiliary(month=None):
     try:
         ids = mdb.get(q.volana == month)['mpitory']
     except TypeError:
-        return lambda: False
+        return lambda _: False
 
     return lambda preacher: preacher['id'] in ids
 

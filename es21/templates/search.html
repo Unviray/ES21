@@ -46,27 +46,25 @@
 
 {% block script %}
     <script>
-        function ajax(text, func) {
-            var result = ''
+        function ajax(text, func, n) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', text);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    result = xhr.responseText;
-                    func(result);
+                    func(xhr.responseText, n);
                 }
             }
             xhr.send(null);
         }
 
-        function push(template) {
-            var startTag = '<div class="col-md-6 mb-3">'
+        function push(template, n) {
+            var startTag = `<div class="col-md-6 mb-3" id="item_${n}">`
             var endTag = '</div>'
             $("#result").append(startTag + template + endTag);
         }
 
         {% for p in preacher %}
-        ajax("{{ url('widget.pr_card_uncached', id=p['id']) }}", push);
+        ajax("{{ url('widget.pr_card_uncached', id=p['id']) }}", push, {{ loop.index }});
         {% endfor %}
     </script>
 {% endblock script %}
