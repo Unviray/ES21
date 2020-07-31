@@ -410,16 +410,28 @@ def all_table(preachers):
         auxiliary=False,
     )
 
-    moyen = Row(
-        month=custom_month('Moyen'),
-        publication=round(total.publication / n_returned, 2),
-        video=round(total.video / n_returned, 2),
-        hour=round(total.hour / n_returned, 2),
-        visit=round(total.visit / n_returned, 2),
-        study=round(total.study / n_returned, 2),
-        remark='',
-        auxiliary=False,
-    )
+    if n_returned > 0:
+        moyen = Row(
+            month=custom_month('Moyen'),
+            publication=round(total.publication / n_returned, 2),
+            video=round(total.video / n_returned, 2),
+            hour=round(total.hour / n_returned, 2),
+            visit=round(total.visit / n_returned, 2),
+            study=round(total.study / n_returned, 2),
+            remark='',
+            auxiliary=False,
+        )
+    else:
+        moyen = Row(
+            month=custom_month('Moyen'),
+            publication=0,
+            video=0,
+            hour=0,
+            visit=0,
+            study=0,
+            remark='',
+            auxiliary=False,
+        )
 
     result.append(total)
     result.append(moyen)

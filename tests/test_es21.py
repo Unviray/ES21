@@ -20,6 +20,7 @@ def test_new_first(client):
     assert rv.status_code == 200
     assert b'invalid' not in rv.data
     assert b'Mpitory vaovao' not in rv.data
+
     assert b'jo' in rv.data
     assert b'033 33 333 33' in rv.data
     assert b'20 febroary 2000' in rv.data

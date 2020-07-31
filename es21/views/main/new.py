@@ -1,6 +1,6 @@
 """
 es21.views.main.new
-====================
+===================
 
 Creating new preacher.
 """
@@ -42,6 +42,7 @@ class NewPreacherHandler(object):
         self.db = get_db()
         q = Query()
 
+        # get untaken id start from 100
         no_id = 100
         while self.db.get(q.id == no_id) is not None:
             no_id += 1
