@@ -9,7 +9,7 @@ from tinydb import Query
 
 from ...database import get_db
 from ...utils import templated
-from ...filters import is_auxiliary
+from ...filters import is_auxiliary, bap_one_year
 
 
 @templated('widgets/pr_card.html')
@@ -25,4 +25,5 @@ def entry(id, use_long_name=False):
     return dict(
         p=p,
         use_long_name=use_long_name,
-        is_auxiliary=is_auxiliary()(p))
+        is_auxiliary=is_auxiliary()(p),
+        bap_one_year=bap_one_year()(p))

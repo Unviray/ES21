@@ -39,7 +39,7 @@ def date(d):
 
 def pionner_name(pcode):
     """
-    Translate database pionner code to pretiie format
+    Translate database pionner code to prettie format
     """
 
     if pcode.istitle():
