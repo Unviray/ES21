@@ -4,6 +4,31 @@ ES21
 Electronic S-21
 
 
+Install
+-------
+
+Clone this repository
+
+.. code-block:: shell
+
+    $ git clone https://github.com/Unviray/ES21
+    $ cd ES21/
+
+Install dependency
+
+.. code-block:: shell
+
+    $ pip install -r requirements.txt
+
+Run it
+
+.. code-block::
+
+    $ gunicorn "es21:create_app()" -w 2
+
+Open you browser and enter in this link http://127.0.0.1:8000/
+
+
 Contributing
 ------------
 
