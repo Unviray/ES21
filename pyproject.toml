@@ -14,6 +14,7 @@ flask-WTF = "^0.14.3"
 gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.0.2"
 
 [build-system]
 requires = ["poetry>=0.12"]

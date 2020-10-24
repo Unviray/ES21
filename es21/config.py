@@ -9,6 +9,7 @@ from pathlib import Path
 from datetime import date
 
 from .const import month_name, month_short2long
+from ._type import _int
 
 
 class MonthBase(object):
@@ -44,10 +45,10 @@ class MonthBase(object):
             month, year = obj.split('_' if '_' in obj else '-')
 
             if month.isdigit():
-                self.data = date(int(year), int(month), 1)  # day 1 is ignored
+                self.data = date(_int(year), _int(month), 1)  # day 1 is ignored
             else:
                 self.data = date(
-                    year=int(year),
+                    year=_int(year),
                     month=self.MONTH_NAME.index(month) + 1,
                     day=1, )  # day 1 is ignored
 

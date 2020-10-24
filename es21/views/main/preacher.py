@@ -22,6 +22,8 @@ from ...forms import ReportForm
 
 from ...filters import Filter, returned, is_auxiliary
 
+from es21._type import _int, _sum
+
 
 q = Query()
 
@@ -102,7 +104,7 @@ def sort_month(report, revers=True):
         result_month[key] = report[key]
 
     # sort year
-    keys = sorted(result_month, key=lambda x: int(x.split('_')[1]))
+    keys = sorted(result_month, key=lambda x: _int(x.split('_')[1]))
 
     result_year = OrderedDict()
     for key in keys:
@@ -176,11 +178,11 @@ class ReportHandler(object):
 
         if self.form.validate_on_submit():
             data = {
-                'zavatra_napetraka': self.form.publication.data,
-                'video': self.form.video.data,
-                'ora': self.form.hour.data,
-                'fitsidihana': self.form.visit.data,
-                'fampianarana': self.form.study.data,
+                'zavatra_napetraka': _int(self.form.publication.data),
+                'video': _int(self.form.video.data),
+                'ora': _int(self.form.hour.data),
+                'fitsidihana': _int(self.form.visit.data),
+                'fampianarana': _int(self.form.study.data),
                 'fanamarihana': self.form.remark.data,
                 'mpisavalalana': self.form.pionner.data, }
 
@@ -280,8 +282,8 @@ def growth_data(id, name, preachers):
     last_f = Filter(preachers)
     last_f('returned', month=str(last_month))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data = _sum([get_data(pr, last_month) for pr in last_f.preachers])
 
     return GrowthData(name, last_data, now_data)
 
@@ -323,15 +325,15 @@ def growth_data_six(id, name, preachers):
     last_f6 = Filter(preachers)
     last_f6('returned', month=str(last_month_6))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data_1 = sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
-    last_data_2 = sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
-    last_data_3 = sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
-    last_data_4 = sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
-    last_data_5 = sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
-    last_data_6 = sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data_1 = _sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
+    last_data_2 = _sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
+    last_data_3 = _sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
+    last_data_4 = _sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
+    last_data_5 = _sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
+    last_data_6 = _sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
 
-    last_data = sum([
+    last_data = _sum([
         last_data_1,
         last_data_2,
         last_data_3,
@@ -401,11 +403,11 @@ def all_table(preachers):
 
     total = Row(
         month=custom_month('Total'),
-        publication=sum([_.publication for _ in result]),
-        video=sum([_.video for _ in result]),
-        hour=sum([_.hour for _ in result]),
-        visit=sum([_.visit for _ in result]),
-        study=sum([_.study for _ in result]),
+        publication=_sum([_.publication for _ in result]),
+        video=_sum([_.video for _ in result]),
+        hour=_sum([_.hour for _ in result]),
+        visit=_sum([_.visit for _ in result]),
+        study=_sum([_.study for _ in result]),
         remark='',
         auxiliary=False,
     )

@@ -15,6 +15,8 @@ from ...utils import templated, navbar_form, get_service_year
 from ...database import get_db
 from ...filters import Filter, returned
 
+from es21._type import _sum
+
 
 @templated('group/home.html')
 @navbar_form
@@ -100,7 +102,7 @@ def hour_chart(preachers, gid):
         fr('in_group', gid)
         fr('returned', month=str(month))
 
-        s_hour = sum([pr['tatitra'][str(month)]['ora'] for pr in fr.preachers])
+        s_hour = _sum([pr['tatitra'][str(month)]['ora'] for pr in fr.preachers])
 
         label.append(month.prettie('{short_month} {short_year}'))
         data.append((s_hour,))
@@ -124,8 +126,8 @@ def growth_data(id, name, preachers):
     last_f = Filter(preachers)
     last_f('returned', month=str(last_month))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data = _sum([get_data(pr, last_month) for pr in last_f.preachers])
 
     return GrowthData(name, last_data, now_data)
 
@@ -167,15 +169,15 @@ def growth_data_six(id, name, preachers):
     last_f6 = Filter(preachers)
     last_f6('returned', month=str(last_month_6))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data_1 = sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
-    last_data_2 = sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
-    last_data_3 = sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
-    last_data_4 = sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
-    last_data_5 = sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
-    last_data_6 = sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data_1 = _sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
+    last_data_2 = _sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
+    last_data_3 = _sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
+    last_data_4 = _sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
+    last_data_5 = _sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
+    last_data_6 = _sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
 
-    last_data = sum([
+    last_data = _sum([
         last_data_1,
         last_data_2,
         last_data_3,

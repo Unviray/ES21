@@ -10,7 +10,7 @@ from flask import current_app as app
 from tinydb import Query
 
 from .database import get_db
-
+from ._type import _int
 
 q = Query()
 
@@ -133,7 +133,7 @@ def in_group(gid):
 
     def func(preacher):
         try:
-            return preacher['groupe'] == int(gid)
+            return preacher['groupe'] == _int(gid)
         except TypeError:
             return True
 

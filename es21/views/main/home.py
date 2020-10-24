@@ -17,6 +17,8 @@ from ...database import get_db
 from ...sorters import tri_pionner
 from ...filters import Filter
 
+from es21._type import _sum
+
 
 @templated('home.html')
 @navbar_form
@@ -81,35 +83,35 @@ def post_report(preachers):
 
     non = {
         'isa': len(p.non),
-        'zvn': sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.non]),
-        'vid': sum([_['tatitra'][MONTH]['video'] for _ in p.non]),
-        'ora': sum([_['tatitra'][MONTH]['ora'] for _ in p.non]),
-        'fit': sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.non]),
-        'fam': sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.non]), }
+        'zvn': _sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.non]),
+        'vid': _sum([_['tatitra'][MONTH]['video'] for _ in p.non]),
+        'ora': _sum([_['tatitra'][MONTH]['ora'] for _ in p.non]),
+        'fit': _sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.non]),
+        'fam': _sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.non]), }
 
     aux = {
         'isa': len(p.aux),
-        'zvn': sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.aux]),
-        'vid': sum([_['tatitra'][MONTH]['video'] for _ in p.aux]),
-        'ora': sum([_['tatitra'][MONTH]['ora'] for _ in p.aux]),
-        'fit': sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.aux]),
-        'fam': sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.aux]), }
+        'zvn': _sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.aux]),
+        'vid': _sum([_['tatitra'][MONTH]['video'] for _ in p.aux]),
+        'ora': _sum([_['tatitra'][MONTH]['ora'] for _ in p.aux]),
+        'fit': _sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.aux]),
+        'fam': _sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.aux]), }
 
     reg = {
         'isa': len(p.reg),
-        'zvn': sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.reg]),
-        'vid': sum([_['tatitra'][MONTH]['video'] for _ in p.reg]),
-        'ora': sum([_['tatitra'][MONTH]['ora'] for _ in p.reg]),
-        'fit': sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.reg]),
-        'fam': sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.reg]), }
+        'zvn': _sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.reg]),
+        'vid': _sum([_['tatitra'][MONTH]['video'] for _ in p.reg]),
+        'ora': _sum([_['tatitra'][MONTH]['ora'] for _ in p.reg]),
+        'fit': _sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.reg]),
+        'fam': _sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.reg]), }
 
     tot = {
         'isa': len(p.all),
-        'zvn': sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.all]),
-        'vid': sum([_['tatitra'][MONTH]['video'] for _ in p.all]),
-        'ora': sum([_['tatitra'][MONTH]['ora'] for _ in p.all]),
-        'fit': sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.all]),
-        'fam': sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.all]), }
+        'zvn': _sum([_['tatitra'][MONTH]['zavatra_napetraka'] for _ in p.all]),
+        'vid': _sum([_['tatitra'][MONTH]['video'] for _ in p.all]),
+        'ora': _sum([_['tatitra'][MONTH]['ora'] for _ in p.all]),
+        'fit': _sum([_['tatitra'][MONTH]['fitsidihana'] for _ in p.all]),
+        'fam': _sum([_['tatitra'][MONTH]['fampianarana'] for _ in p.all]), }
 
     result = namedtuple('PostReport', ['non', 'aux', 'reg', 'tot'])
     return result(non, aux, reg, tot)
@@ -129,17 +131,17 @@ def hour_chart(preachers):
         f = Filter(preachers)
         f('returned', month=str(month))
 
-        hour = sum([get_hour(pr, month) for pr in f.preachers])
+        hour = _sum([get_hour(pr, month) for pr in f.preachers])
 
         f_aux = Filter(f.preachers)
         f_aux('is_auxiliary', month=str(month))
 
-        aux_hour = sum([get_hour(pr, month) for pr in f_aux.preachers])
+        aux_hour = _sum([get_hour(pr, month) for pr in f_aux.preachers])
 
         f_reg = Filter(f.preachers)
         f_reg('is_regular')
 
-        reg_hour = sum([get_hour(pr, month) for pr in f_reg.preachers])
+        reg_hour = _sum([get_hour(pr, month) for pr in f_reg.preachers])
 
         label.append(month.prettie('{short_month} {short_year}'))
         data.append((hour, reg_hour, aux_hour))
@@ -167,8 +169,8 @@ def growth_data(id, name, preachers):
     last_f = Filter(preachers)
     last_f('returned', month=str(last_month))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data = sum([get_data(pr, last_month) for pr in last_f.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data = _sum([get_data(pr, last_month) for pr in last_f.preachers])
 
     return GrowthData(name, last_data, now_data)
 
@@ -210,15 +212,15 @@ def growth_data_six(id, name, preachers):
     last_f6 = Filter(preachers)
     last_f6('returned', month=str(last_month_6))
 
-    now_data = sum([get_data(pr, month) for pr in f.preachers])
-    last_data_1 = sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
-    last_data_2 = sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
-    last_data_3 = sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
-    last_data_4 = sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
-    last_data_5 = sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
-    last_data_6 = sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
+    now_data = _sum([get_data(pr, month) for pr in f.preachers])
+    last_data_1 = _sum([get_data(pr, last_month_1) for pr in last_f1.preachers])
+    last_data_2 = _sum([get_data(pr, last_month_2) for pr in last_f2.preachers])
+    last_data_3 = _sum([get_data(pr, last_month_3) for pr in last_f3.preachers])
+    last_data_4 = _sum([get_data(pr, last_month_4) for pr in last_f4.preachers])
+    last_data_5 = _sum([get_data(pr, last_month_5) for pr in last_f5.preachers])
+    last_data_6 = _sum([get_data(pr, last_month_6) for pr in last_f6.preachers])
 
-    last_data = sum([
+    last_data = _sum([
         last_data_1,
         last_data_2,
         last_data_3,
