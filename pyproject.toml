@@ -12,6 +12,7 @@ tinydb = "^4.1.1"
 tinydb-serialization = "^2.0.0"
 flask-WTF = "^0.14.3"
 gunicorn = "^20.0.4"
+pdfforms = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.2"

@@ -98,6 +98,7 @@ class MonthBase(object):
         """
         Use to jump {n} month behind
         """
+
         y = self.data.year
         m = self.data.month
 
@@ -115,6 +116,7 @@ class MonthBase(object):
         """
         Use to jump {n} month forward
         """
+
         y = self.data.year
         m = self.data.month
 
