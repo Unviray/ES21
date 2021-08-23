@@ -3,6 +3,8 @@ ES21
 
 Electronic S-21
 
+This project will be replaced with https://github.com/Unviray/Sreport-backend and https://github.com/Unviray/Sreport-frontend
+
 
 Install
 -------
@@ -27,6 +29,25 @@ Run it
     $ gunicorn "es21:create_app()" -w 2
 
 Open you browser and enter in this link http://127.0.0.1:8000/
+
+
+Screenshoot
+-----------
+
+.. image:: images/img1.jpg
+  :width: 400
+
+.. image:: images/img2.jpg
+  :width: 400
+
+.. image:: images/img3.jpg
+  :width: 400
+
+.. image:: images/img4.jpg
+  :width: 400
+
+.. image:: images/img5.jpg
+  :width: 400
 
 
 Contributing
