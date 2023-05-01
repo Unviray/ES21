@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flask = "^1.1.2"
+flask = "^2.3.2"
 tinydb = "^4.1.1"
 tinydb-serialization = "^2.0.0"
 flask-WTF = "^0.14.3"
