@@ -28,7 +28,7 @@ def entry(id):
         preacher['anarana'],
         preacher['fanampinanarana'], ]
 
-    if preacher['anarana_feno'] != '':
+    if preacher.get('anarana_feno', "") != '':
         pattern.append(preacher['anarana_feno'])
 
     if name in pattern:

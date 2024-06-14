@@ -4,7 +4,7 @@ month_name = {
     'feb': 'feb',
     'mar': 'mar',
     'apr': 'apr',
-    'may': 'may',
+    'may': 'mey',
     'jun': 'jon',
     'jul': 'jol',
     'aug': 'aog',
@@ -18,7 +18,7 @@ month_name = {
     'february': 'febroary',
     'march': 'martsa',
     'april': 'aprily',
-    'may': 'may',
+    'may': 'mey',
     'june': 'jona',
     'july': 'jolay',
     'august': 'aogositra',
@@ -32,7 +32,7 @@ month_short2long = {
     'feb': 'febroary',
     'mar': 'martsa',
     'apr': 'aprily',
-    'may': 'may',
+    'may': 'mey',
     'jun': 'jona',
     'jul': 'jolay',
     'aug': 'aogositra',
@@ -46,7 +46,7 @@ month_long2short = {
     'february': 'feb',
     'march': 'mar',
     'april': 'apr',
-    'may': 'may',
+    'may': 'mey',
     'june': 'jon',
     'july': 'jol',
     'august': 'aog',
@@ -60,7 +60,7 @@ month_list = (
     'febroary',
     'martsa',
     'aprily',
-    'may',
+    'mey',
     'jona',
     'jolay',
     'aogositra',
@@ -80,7 +80,10 @@ filter_name = {
     'not_returned': 'tsy namerina',
     'is_regular': 'mpisavalalana maharitra',
     'is_auxiliary': 'mpisavalalana mpanampy',
+    'is_not_regular': 'tsy mpisavalalana maharitra',
     'assistant': "mpanampy amin'ny fanompoana",
+    'baptised': 'vita batisa',
+    'not_baptised': 'tsy vita batisa',
     'bap_one_year': "vita batisa herintaona", }
 
 reverse_filter_name = {
@@ -88,7 +91,10 @@ reverse_filter_name = {
     'tsy namerina': 'not_returned',
     'mpisavalalana maharitra': 'is_regular',
     'mpisavalalana mpanampy': 'is_auxiliary',
+    'tsy mpisavalalana maharitra': 'is_not_regular',
     "mpanampy amin'ny fanompoana": 'assistant',
+    'vita batisa': 'baptised',
+    'tsy vita batisa': 'not_baptised',
     "vita batisa herintaona": 'bap_one_year', }
 
 

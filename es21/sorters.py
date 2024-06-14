@@ -11,7 +11,7 @@ from flask import current_app as app
 from tinydb import Query
 
 from .database import get_db
-from .filters import not_returned
+from .filters import not_returned, is_auxiliary
 
 
 q = Query()
@@ -25,21 +25,14 @@ def tri_pionner(preachers, month=None):
     - regular pionner
     """
 
-    mdb = get_db('mpanampy')
     month = month or str(app.config['MONTH'])
-    aux_list = mdb.get(q.volana == month)
-
-    try:
-        aux_list = aux_list['mpitory']
-    except TypeError:
-        aux_list = []
 
     non = []  # basic preachers
     aux = []  # auxiliar pionner
     reg = []  # regular pionner
 
     for preacher in preachers:
-        if preacher['id'] in aux_list:
+        if is_auxiliary()(preacher):
             aux.append(preacher)
 
         elif preacher['maharitra']:
